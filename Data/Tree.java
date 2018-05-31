@@ -69,8 +69,8 @@ public class Tree {
         while(it.hasNext()) {
            double t = 2*Math.PI/root.children.size();
            me = it.next();
-           me.x = (int)(Math.cos(t*i)*10);
-           me.y = (int)(Math.sin(t*i)*10);
+           me.x = (int)(Math.cos(t*i)*100);
+           me.y = (int)(Math.sin(t*i)*100);
            i++;
            System.out.println((String)me.info+"("+me.x+", "+me.y+")");
         }
@@ -105,8 +105,8 @@ public class Tree {
            d = Math.hypot(me.parent.x, me.parent.y);
            t = (-2.0/3.0)*Math.PI+Math.atan2( me.parent.y, me.parent.x);
            if(!(me.parent.x == 0 && me.parent.y == 0)) {
-              me.x=(me.x +me.parent.x +(int)(Math.cos(t+(4.0/3.0*Math.PI/(double)(n+1))*j)*100.0/d));
-              me.y=(me.y + me.parent.y+(int)(Math.sin(t+(4.0/3.0*Math.PI/(double)(n+1))*j)*100.0/d));
+              me.x=(me.x +me.parent.x +(int)(Math.cos(t+(4.0/3.0*Math.PI/(double)(n+1))*j)*500.0/Math.cbrt(d)));
+              me.y=(me.y + me.parent.y+(int)(Math.sin(t+(4.0/3.0*Math.PI/(double)(n+1))*j)*500.0/Math.cbrt(d)));
            }
 
            j++;

@@ -18,8 +18,8 @@ public class Node {
         this.info=info;
         x=0;
         y=0;
-        h=0;
-        w=0;
+        h=40;
+        w=60;
         color=null;
         children  = new ArrayList<Node>();
     }

@@ -191,9 +191,10 @@ public class MindmapArea extends JPanel {
     		showNode.setOpaque(true);
     		showNode.setBorder(new TitledBorder(new LineBorder(Color.black,3)));
     		
-    		showNode.setSize(60, 40);
-    		System.out.println((int)(dataNode.x*10 + this.getSize().getWidth()/2) + "," + (int)(dataNode.y*10+ this.getSize().getHeight()/2));
-    		showNode.setLocation((int)(dataNode.x*10 + this.getSize().getWidth()/2), (int)(dataNode.y*10+ this.getSize().getHeight()/2));    		
+    		showNode.setSize(dataNode.w, dataNode.h);
+    		System.out.println(dataNode.x +","+dataNode.y);
+    		System.out.println((int)(dataNode.x + this.getSize().getWidth()/2) + "," + (int)(dataNode.y+ this.getSize().getHeight()/2));
+    		showNode.setLocation((int)(dataNode.x + this.getSize().getWidth()/2), (int)(dataNode.y+ this.getSize().getHeight()/2));    		
     		this.add(showNode);
 
     		showNode.setVisible(true);
