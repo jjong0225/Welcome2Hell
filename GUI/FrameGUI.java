@@ -2,12 +2,17 @@ package GUI;
 
 import javax.swing.*;
 import Data.Tree;
+import EventListener.FrameResizedListener;
+import EventListener.NodeListener;
+
 import java.awt.*;
 
 public class FrameGUI extends JFrame {
 	JFrame mainFrame;
 	JTextArea textarea;
 	Tree mainTree;
+	MindmapArea mindmapArea;
+	JSplitPane splitPane2;
 	
 	public FrameGUI (JFrame mainFrame, Tree mainTree) {
 		this.mainFrame = mainFrame;
@@ -46,7 +51,7 @@ public class FrameGUI extends JFrame {
 		JToolBar toolbar = new JToolBar("ToolBar");
 		toolbar.setBackground(Color.black);
 		toolbar.add(new JButton("ti1"));
-		
+		toolbar.setVisible(true);
 		mainFrame.add(toolbar);
 		
 
@@ -59,7 +64,8 @@ public class FrameGUI extends JFrame {
 //....................................................................		
 		// ¸¶ÀÎµå¸Ê ÆÇ³Ú
 
-		MindmapArea mindmapArea = new MindmapArea(mainTree);
+		mindmapArea = new MindmapArea(mainTree, mainFrame);
+//		mindmapArea.mindmapPane.setLayout(null);
 //		
 				
 //....................................................................		
@@ -71,7 +77,7 @@ public class FrameGUI extends JFrame {
 		
 		// µ¥ÀÌÅÍ ºÎºĞ
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT); 
-        JSplitPane splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT); 
+        splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT); 
         
         splitPane1.setRightComponent(splitPane2); //¿ìÃø ÄÄÆ÷³ÍÆ® ÀåÂø
         
@@ -80,14 +86,16 @@ public class FrameGUI extends JFrame {
         splitPane2.setDividerLocation((WMF/2));
         
         splitPane1.setLeftComponent(textArea.textPane); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
-        splitPane2.setLeftComponent(mindmapArea.mindmapPane); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
+        splitPane2.setLeftComponent(mindmapArea); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
         splitPane2.setRightComponent(attributeArea.attributePane); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
         
         
         
   //....................................................................		
-		textArea.applyButton.addActionListener(new EventListener.ApplyMap(mindmapArea.mindmapPane, mainTree));
+		textArea.applyButton.addActionListener(new EventListener.ApplyMap(mindmapArea, mainTree));
 		textArea.applyButton.addActionListener(new EventListener.ApplyListener(textArea.textarea, mainTree));
+		mainFrame.addComponentListener(new FrameResizedListener(mindmapArea));
+		mindmapArea.addMouseListener(new NodeListener(mainTree, mindmapArea));
 
         
         conPane.add(splitPane1);
@@ -102,4 +110,8 @@ public class FrameGUI extends JFrame {
 	public JTextArea getJTextArea() {
 		return textarea;
 	}
+	public MindmapArea getmindmapArea() {
+		return mindmapArea;
+	}
+
 }

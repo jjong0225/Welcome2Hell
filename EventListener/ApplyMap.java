@@ -16,7 +16,12 @@ public class ApplyMap implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-//		ApplyMapFunction.applyMapFunction(mainTree, mainTree.root, mindmapPane);
+		System.out.println(mindmapPane);
+		mindmapPane.removeAll();
+//		mindmapPane.repaint();
+		mindmapPane.revalidate();
 		mindmapPane.repaint();
+		System.out.println(mindmapPane);
+		System.out.println("repainted");
 	}
 }
