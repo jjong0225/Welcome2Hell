@@ -12,7 +12,7 @@ import Function.ApplyTree;
 import Function.NodeSearch;
 import GUI.*;
 import Data.*;
-
+import Data.Point;
 
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -24,70 +24,60 @@ public class NodeListener implements MouseListener{
 	JPanel mindmapArea;
 	Node dataNode;
 	int flag;
-	int flag2;
-	int eventx;
-	int eventy;
+	Point event;
 	
 	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode) {
 		this.t = t;
 		this.mindmapArea = mindmapArea;
 		this.dataNode = dataNode;
-		flag2 = 1;
 	}
 	public void mousePressed(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-		eventx = x;
-		eventy = y;
-		System.out.println(x + " " + y);
+		event = new Point(e.getX(),e.getY());
+		System.out.println(event);
 	}
 	public void mouseReleased(MouseEvent e) {
-			int x2 = e.getX();
-			int y2 = e.getY();
+			Point p2 = new Point(e.getX(),e.getY());
 			int rec = 10;
 			flag = 1;
-			if(eventx <= dataNode.w && eventy <= rec) 
+			if(event.getX() <= dataNode.getWidth() && event.getY() <= rec) 
 				flag *=2;
-			if(eventx <= dataNode.w && dataNode.h - rec <= eventy) 
+			if(event.getX() <= dataNode.getWidth() && dataNode.getHeight() - rec <= event.getY()) 
 				flag *=3;
-			if(eventy <= dataNode.h && eventx <= rec) 
+			if(event.getY() <= dataNode.getHeight() && event.getX() <= rec) 
 				flag *=5;
-			if(eventy <= dataNode.h && dataNode.w - rec <= eventx) 
+			if(event.getY() <= dataNode.getHeight() && dataNode.getWidth() - rec <= event.getX()) 
 				flag *=7;
 			
 			
 			if(flag%2==0) {
-				dataNode.y += y2 - eventy;
-				dataNode.h += eventy - y2;
+				dataNode.setY(dataNode.getY() + p2.getY() - event.getY());
+				dataNode.setHeight((int) (dataNode.getHeight() + event.getY() - p2.getY()));
 			}
 			if(flag%3==0) {
-				dataNode.h += y2 - eventy;
+				dataNode.setHeight((int) (dataNode.getHeight() + p2.getY() - event.getY()));
 			}
 			if(flag%5==0) {
-				dataNode.x += x2 - eventx;
-				dataNode.w += eventx - x2;
+				dataNode.setX(dataNode.getX() + p2.getX() - event.getX());
+				dataNode.setWidth((int) (dataNode.getWidth() + event.getX() - p2.getX()));
 			}
 			if(flag%7==0) {
-				dataNode.w += x2 - eventx;
+				dataNode.setWidth((int) (dataNode.getWidth() + p2.getX() - event.getX()));
 			}
 			if(flag == 1) {
-				dataNode.x += x2 - eventx;
-				dataNode.y += y2 - eventy;
+				dataNode.setPoint(dataNode.getX() + p2.getX() - event.getX(), dataNode.getY() + p2.getY() - event.getY());
 			}
-			if(x2 == eventx && y2 == eventy)
+			if(p2.equals(event))
 				;
 			else {
 				mindmapArea.removeAll();
 				mindmapArea.revalidate();
 				mindmapArea.repaint();
 			}
-
 		
 		}
 	public void mouseClicked(MouseEvent e) {
-		flag2 *= -1;
-		System.out.println("ï¿½ï¿½ï¿½x!!!!!!!!!!!!!!!!!");
-		dataNode.color = new Color(255-dataNode.color.getRed(),255-dataNode.color.getGreen(),255-dataNode.color.getBlue(),100);
+		System.out.println("¿À¿ìšx!!!!!!!!!!!!!!!!!");
+		dataNode.setColor(new Color(255-dataNode.getColor().getRed(),255-dataNode.getColor().getGreen(),255-dataNode.getColor().getBlue(),100));
 		mindmapArea.removeAll();
 		mindmapArea.revalidate();
 		mindmapArea.repaint();

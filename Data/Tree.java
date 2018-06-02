@@ -10,22 +10,33 @@ import javax.swing.JPanel;
 
 
 public class Tree {
-    public Node root;
-    public Node now;
+    private Node root;
+    private Node now;
    
 
     public Tree(){
     }
-
-    public void addRoot(Object info)
+    public Node getRoot() {
+    	return root;
+    }
+    public Node getNow() {
+    	return now;
+    }
+    public void setRoot(Node root) {
+    	this.root = root;
+    }
+    public void setNow(Node now) {
+    	this.now = now;
+    }
+    public void addRoot(String info)
     {
         root=new Node(info);
         now = root;
-        root.parent=null;
-        root.children=new ArrayList<Node>();
+        root.setParent(null);
+        root.setChildren(new ArrayList<Node>());
     }
 
-    public void addNewNodeVasithChildOfNodeU(Object info)
+    public void addNewNodeVasithChildOfNodeU(String info)
     {
        Node child = new Node(info);
         now.addChild(child);
@@ -40,8 +51,8 @@ public class Tree {
         int count=0;
 
         count++;
-        if(rootNode.children.size()!=0) {
-            for(Node ch : rootNode.children)
+        if(rootNode.getChildren().size()!=0) {
+            for(Node ch : rootNode.getChildren())
                 count=count+numberOfNodesInTree(ch);
         }
 
@@ -56,9 +67,9 @@ public class Tree {
     public void changeRoot(Node newRoot, int i)
     {
         Node oldRoot=this.root;
-        newRoot.parent=null;
+        newRoot.setParent(null);
         newRoot.addChild(oldRoot);
-        oldRoot.parent=newRoot;
+        oldRoot.setParent(newRoot);
         this.root=newRoot;
     }
     
@@ -144,19 +155,18 @@ public class Tree {
         Iterator<Node> it;
         Node me;
         now = root;
-        it = root.children.iterator();
+        it = root.getChildren().iterator();
         int i = 0;
         while(it.hasNext()) {
-            double theta = 2*Math.PI/root.children.size();
+            double theta = 2*Math.PI/root.getChildren().size();
             me = it.next();
-            me.x=100;
-            me.y=theta*i;
+            me.setPoint(100, theta*i);
             i++;
-            System.out.println((String)me.info+"("+me.x+", "+me.y+")");
+            System.out.println((String)me.getInfo()+"("+me.getX()+", "+me.getY()+")");
          }
-        System.out.println(root.info);
+        System.out.println(root.getInfo());
         ArrayList<Node> c;
-        c = now.children;
+        c = now.getChildren();
         it = c.iterator();
         go2c(c,1);
      }
@@ -171,14 +181,14 @@ public class Tree {
               System.out.print("   ");
            }
            
-           me.color = new Color((50*i)%256,(100*i)%256,(150*i)%256,100);
+           me.setColor(new Color((50*i)%256,(100*i)%256,(150*i)%256,100));
            List<Integer> list = new ArrayList<Integer>();
            Node node;
            node = me;
            while(true) {
-        	   list.add(me.parent.children.size());
-        	   me = me.parent;
-        	   if(me.parent == null)
+        	   list.add(me.getParent().getChildren().size());
+        	   me = me.getParent();
+        	   if(me.getParent() == null)
         		   break;
            }
            me = node;
@@ -187,15 +197,14 @@ public class Tree {
            while(ti.hasNext()) {
         	   angle /= (ti.next()+1);
            }
-           angle = angle * (root.children.size()+1)/root.children.size();
+           angle = angle * (root.getChildren().size()+1)/root.getChildren().size();
            
-           if(me.parent != root) {
-        	   me.x= i * 110;
-        	   me.y=(me.y+(me.parent.y - angle*(me.parent.children.size()+1)/2)+angle*(me.parent.children.indexOf(me)+1));
+           if(me.getParent() != root) {
+        	   me.setPoint(i * 110, me.getY()+(me.getParent().getY() - angle*(me.getParent().getChildren().size()+1)/2)+angle*(me.getParent().getChildren().indexOf(me)+1));
            }
 
-           System.out.println(i+(String)me.info+"("+me.x+", "+me.y+")");
-           go2c(me.children, i+1);
+           System.out.println(i+(String)me.getInfo()+"("+me.getX()+", "+me.getY()+")");
+           go2c(me.getChildren(), i+1);
         }
      }
      public void setRealXY() {
@@ -205,9 +214,7 @@ public class Tree {
     	 Node n;
     	 while(it.hasNext()) {
     		 n = it.next();
-    		double temp = n.x;
-    		 n.x=((int)(temp * Math.cos(n.y)));
-    		 n.y=(temp * Math.sin(n.y));
+    		 n.setPoint(n.getX() * Math.cos(n.getY()), n.getX() * Math.sin(n.getY()));
     	 }
      }
      
@@ -215,7 +222,7 @@ public class Tree {
     	 if(now == root)
     		 exArray.add(root);
     	 
-    	        Iterator<Node> it = now.children.iterator();
+    	        Iterator<Node> it = now.getChildren().iterator();
 
     	        if (!it.hasNext())
     	          return exArray;
@@ -231,7 +238,7 @@ public class Tree {
     
     public String toString() {
        
-       return "("+now.x+","+now.y+"),"+now.w+","+now.h+","+now.color+","+now.info;
+       return "("+now.getX()+","+now.getY()+"),"+now.getWidth()+","+now.getHeight()+","+now.getColor()+","+now.getInfo();
     }
    
 }

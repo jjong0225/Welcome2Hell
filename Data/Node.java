@@ -5,26 +5,78 @@ import java.util.ArrayList;
 
 public class Node {
 
-    public Node parent; // The parent of the current node
-    public ArrayList<Node> children; // The children of the current node
-    public Object info;
-    public int x;
-    public double y;
-    public int h;
-    public int w;
-    public Color color;
+    private Node parent; // The parent of the current node
+    private ArrayList<Node> children; // The children of the current node
+    private String info;
+    private Point p;
+    private int h;
+    private int w;
+    private Color color;
 
-    public Node (Object info)
+    public Node (String info)
     {
         this.info=info;
-        x=0;
-        y=0;
+        p = new Point();
         h=40;
         w=60;
         color= new Color(255,255,255,100);
         children  = new ArrayList<Node>();
     }
-    
+    public Node getParent() {
+    	return parent;
+    }
+    public ArrayList<Node> getChildren(){
+    	return children;
+    }
+    public String getInfo() {
+    	return info;
+    }
+    public Point getPoint() {
+    	return p;
+    }
+    public double getX() {
+    	return p.getX();
+    }
+    public double getY() {
+    	return p.getY();
+    }
+    public int getHeight() {
+    	return h;
+    }
+    public int getWidth() {
+    	return w;
+    }
+    public Color getColor() {
+    	return color;
+    }
+    public void setParent(Node n) {
+    	parent = n;
+    }
+    public void setChildren(ArrayList<Node> arr) {
+    	this.children = arr;
+    }
+    public void setInfo(String info) {
+    	this.info = info;
+    }
+    public void setPoint(Number x, Number y) {
+    	p.setX(x);
+    	p.setY(y);
+    }
+    public void setX(Number x) {
+    	p.setX(x);
+    }
+    public void setY(Number y) {
+    	p.setY(y);
+    }
+    public void setHeight(int h) {
+    	this.h = h;
+    }
+    public void setWidth(int w) {
+    	this.w = w;
+    }
+    public void setColor(Color c) {
+    	this.color = c;
+    }
     public void addChild(Node node) {
        node.parent = this;
        this.children.add(node);

@@ -14,11 +14,11 @@ public class ApplyTree {
     	comp = tabCounter[i] - tabCounter[i-1];
        if(comp < 0) {
     	   for(int j = 0 ; j < -comp+1 ; j++)
-        	  t.now = t.now.parent;
+        	  t.setNow(t.getNow().getParent());
           t.addNewNodeVasithChildOfNodeU(strArr[i]);
        }
        else if(comp == 0){
-    	   t.now = t.now.parent;
+    	   t.setNow(t.getNow().getParent());
     	   t.addNewNodeVasithChildOfNodeU(strArr[i]);
        	}
        	else {
