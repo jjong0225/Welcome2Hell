@@ -3,7 +3,7 @@ package GUI;
 import javax.swing.*;
 import Data.Tree;
 import EventListener.FrameResizedListener;
-import EventListener.NodeListener;
+import EventListener.TestNodeListener;
 
 import java.awt.*;
 

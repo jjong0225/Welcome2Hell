@@ -144,8 +144,8 @@ import javax.swing.border.TitledBorder;
 
 import Data.Node;
 import Data.Tree;
-import EventListener.NodeListener;
 import EventListener.TestNodeListener;
+import EventListener.NodeListener;
 
 public class MindmapArea extends JPanel {
 	Tree mainTree;
@@ -199,7 +199,7 @@ public class MindmapArea extends JPanel {
     		showNode.setLocation((int)(dataNode.x + this.getSize().getWidth()/2), (int)(dataNode.y+ this.getSize().getHeight()/2));    		
     		this.add(showNode);
     		showNode.setVisible(true);
-    		showNode.addMouseListener(new TestNodeListener(t,this, dataNode));
+    		showNode.addMouseListener(new NodeListener(t,this, dataNode));
     		showNode = null;
          	}
         NodeArray = null;
