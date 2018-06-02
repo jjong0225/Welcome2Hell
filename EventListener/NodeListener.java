@@ -81,11 +81,12 @@ public class NodeListener implements MouseListener{
 				mindmapArea.revalidate();
 				mindmapArea.repaint();
 			}
+
 		
 		}
 	public void mouseClicked(MouseEvent e) {
 		flag2 *= -1;
-		System.out.println("¿À¿ìšx!!!!!!!!!!!!!!!!!");
+		System.out.println("ï¿½ï¿½ï¿½x!!!!!!!!!!!!!!!!!");
 		dataNode.color = new Color(255-dataNode.color.getRed(),255-dataNode.color.getGreen(),255-dataNode.color.getBlue(),100);
 		mindmapArea.removeAll();
 		mindmapArea.revalidate();
