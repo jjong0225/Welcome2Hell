@@ -145,6 +145,7 @@ import javax.swing.border.TitledBorder;
 import Data.Node;
 import Data.Tree;
 import EventListener.NodeListener;
+import EventListener.TestNodeListener;
 
 public class MindmapArea extends JPanel {
 	Tree mainTree;
@@ -153,6 +154,7 @@ public class MindmapArea extends JPanel {
 	public MindmapArea(Tree mainTree, JFrame mainFrame) { 
 	this.mainTree = mainTree;
 	this.mainFrame = mainFrame;
+	
 //	 mindmapPane.setLayout(null);
 //	 DrawingPane drawing = new DrawingPane(mainTree, mindmapPane, mainFrame);
 //	 drawing.setSize(600, 500);
@@ -185,19 +187,19 @@ public class MindmapArea extends JPanel {
         while(it.hasNext()) {
             Node dataNode = it.next();
     		JLabel showNode =new JLabel((String)(dataNode.info));
-    		System.out.println((String)dataNode.info);
+//    		System.out.println((String)dataNode.info);
     		
-    		showNode.setBackground(Color.white);
+    		showNode.setBackground(dataNode.color);
     		showNode.setOpaque(true);
     		showNode.setBorder(new TitledBorder(new LineBorder(Color.black,3)));
     		
     		showNode.setSize(dataNode.w, dataNode.h);
-    		System.out.println(dataNode.x +","+dataNode.y);
-    		System.out.println((int)(dataNode.x + this.getSize().getWidth()/2) + "," + (int)(dataNode.y+ this.getSize().getHeight()/2));
+//    		System.out.println(dataNode.x +","+dataNode.y);
+//    		System.out.println((int)(dataNode.x + this.getSize().getWidth()/2) + "," + (int)(dataNode.y+ this.getSize().getHeight()/2));
     		showNode.setLocation((int)(dataNode.x + this.getSize().getWidth()/2), (int)(dataNode.y+ this.getSize().getHeight()/2));    		
     		this.add(showNode);
-
     		showNode.setVisible(true);
+    		showNode.addMouseListener(new TestNodeListener(t,this, dataNode));
     		showNode = null;
          	}
         NodeArray = null;

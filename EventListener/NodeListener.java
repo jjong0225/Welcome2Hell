@@ -58,7 +58,7 @@ public class NodeListener implements MouseListener {
 			System.out.println(realy-n.h/2 + " " +eventy +  " "+ (realy+n.h/2));
 			
 			if(realx <= eventx && eventx <= realx + n.w && realy-rec <= eventy && eventy <= realy+rec) {
-				n.y = realy + y2 - eventy -mindmapArea.getSize().getHeight()/2;
+				n.y = realy + y2 - eventy -(int)mindmapArea.getSize().getHeight()/2;
 				n.h = n.h + eventy - y2;
 				mindmapArea.removeAll();
 				mindmapArea.revalidate();
@@ -73,7 +73,7 @@ public class NodeListener implements MouseListener {
 				flag =2;
 			}
 			if(realy <= eventy && eventy <= realy + n.h && realx-rec <= eventx && eventx <= realx+rec) {
-				n.x = realx + x2 - eventx -mindmapArea.getSize().getWidth()/2;
+				n.x = realx + x2 - eventx -(int)mindmapArea.getSize().getWidth()/2;
 				n.w = n.w + eventx - x2;
 				mindmapArea.removeAll();
 				mindmapArea.revalidate();
@@ -89,8 +89,8 @@ public class NodeListener implements MouseListener {
 				return;
 			}
 			if(((realx < eventx) && (eventx<realx+n.w)) && ((realy < eventy) && (eventy<realy+n.h))) {
-				n.x = (x2-eventx+realx-mindmapArea.getSize().getWidth()/2);
-				n.y = (y2-eventy+realy-mindmapArea.getSize().getHeight()/2);
+				n.x = (x2-eventx+realx-(int)mindmapArea.getSize().getWidth()/2);
+				n.y = (y2-eventy+realy-(int)mindmapArea.getSize().getHeight()/2);
 				mindmapArea.removeAll();
 				mindmapArea.revalidate();
 				mindmapArea.repaint();
@@ -102,7 +102,10 @@ public class NodeListener implements MouseListener {
 		}
 		
 		}
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		flag = 1;
+		
+	}
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {

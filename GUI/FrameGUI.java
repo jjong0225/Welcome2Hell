@@ -95,7 +95,7 @@ public class FrameGUI extends JFrame {
 		textArea.applyButton.addActionListener(new EventListener.ApplyMap(mindmapArea, mainTree));
 		textArea.applyButton.addActionListener(new EventListener.ApplyListener(textArea.textarea, mainTree));
 		mainFrame.addComponentListener(new FrameResizedListener(mindmapArea));
-		mindmapArea.addMouseListener(new NodeListener(mainTree, mindmapArea));
+//		mindmapArea.addMouseListener(new NodeListener(mainTree, mindmapArea));
 
         
         conPane.add(splitPane1);

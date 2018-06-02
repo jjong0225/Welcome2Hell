@@ -1,5 +1,6 @@
 package Data;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class Node {
@@ -7,11 +8,11 @@ public class Node {
     public Node parent; // The parent of the current node
     public ArrayList<Node> children; // The children of the current node
     public Object info;
-    public double x;
+    public int x;
     public double y;
     public int h;
     public int w;
-    String color;
+    public Color color;
 
     public Node (Object info)
     {
@@ -20,7 +21,7 @@ public class Node {
         y=0;
         h=40;
         w=60;
-        color=null;
+        color= new Color(255,255,255,100);
         children  = new ArrayList<Node>();
     }
     
