@@ -3,7 +3,6 @@ package GUI;
 import javax.swing.*;
 import Data.Tree;
 import EventListener.FrameResizedListener;
-import EventListener.NodeListener;
 
 import java.awt.*;
 
@@ -95,7 +94,6 @@ public class FrameGUI extends JFrame {
 		textArea.applyButton.addActionListener(new EventListener.ApplyMap(mindmapArea, mainTree));
 		textArea.applyButton.addActionListener(new EventListener.ApplyListener(textArea.textarea, mainTree));
 		mainFrame.addComponentListener(new FrameResizedListener(mindmapArea));
-		mindmapArea.addMouseListener(new NodeListener(mainTree, mindmapArea));
 
         
         conPane.add(splitPane1);

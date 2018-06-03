@@ -153,6 +153,7 @@ public class MindmapArea extends JPanel {
 	public MindmapArea(Tree mainTree, JFrame mainFrame) { 
 	this.mainTree = mainTree;
 	this.mainFrame = mainFrame;
+	
 //	 mindmapPane.setLayout(null);
 //	 DrawingPane drawing = new DrawingPane(mainTree, mindmapPane, mainFrame);
 //	 drawing.setSize(600, 500);
@@ -176,29 +177,40 @@ public class MindmapArea extends JPanel {
 		
 		Tree t = mainTree;
 
-		if (t.root == null)
+		if (t.getRoot() == null)
 			return;
 		
-		t.makeArray(NodeArray,t.root);
+		t.makeArray(NodeArray,t.getRoot());
 		
         Iterator<Node> it = NodeArray.iterator();
         while(it.hasNext()) {
             Node dataNode = it.next();
-    		JLabel showNode =new JLabel((String)(dataNode.info));
-    		System.out.println((String)dataNode.info);
+    		JLabel showNode =new JLabel((String)(dataNode.getInfo()));
+//    		System.out.println((String)dataNode.info);
     		
-    		showNode.setBackground(Color.white);
+    		showNode.setBackground(dataNode.getColor());
     		showNode.setOpaque(true);
     		showNode.setBorder(new TitledBorder(new LineBorder(Color.black,3)));
     		
-    		showNode.setSize(60, 40);
-    		System.out.println((int)(dataNode.x*10 + this.getSize().getWidth()/2) + "," + (int)(dataNode.y*10+ this.getSize().getHeight()/2));
-    		showNode.setLocation((int)(dataNode.x*10 + this.getSize().getWidth()/2), (int)(dataNode.y*10+ this.getSize().getHeight()/2));    		
+    		showNode.setSize(dataNode.getWidth(), dataNode.getHeight());
+    		showNode.setLocation((int)(dataNode.getX() + this.getSize().getWidth()/2), (int)(dataNode.getY() + this.getSize().getHeight()/2));    		
     		this.add(showNode);
-
     		showNode.setVisible(true);
+    		showNode.addMouseListener(new NodeListener(t,this, dataNode));
     		showNode = null;
          	}
+//        it = NodeArray.iterator();
+//        while(it.hasNext()) {
+//        	Node dataNode = it.next();
+//        	int parentUp ;
+//        	int parentRight;
+//        	int parentLeft;
+//        	int parentDown;
+//        	int nodeUp;
+//        	int nodeDown;
+//        	int nodeLeft;
+//        	int nodeRight;
+//        }
         NodeArray = null;
 		}
 }
