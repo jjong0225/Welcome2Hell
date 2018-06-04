@@ -23,5 +23,7 @@ public class ApplyMap implements ActionListener {
 		mindmapPane.repaint();
 		System.out.println(mindmapPane);
 		System.out.println("repainted");
+		Function.JsonHandler.saveData(mainTree);
+
 	}
 }

@@ -22,6 +22,33 @@ public class Node {
         color= new Color(255,255,255,100);
         children  = new ArrayList<Node>();
     }
+    
+    public void setAll (Point p, int w, int h, String colorString,ArrayList<Node> children, Node parent){
+    	this.p=p;
+    	this.w=w;
+    	this.h=h;
+    	this.p=p;
+    	this.children = children;
+    	this.parent = parent;
+		String tmpColor = colorString;
+		Color color = null;
+
+		if (tmpColor != null) {
+			int ColorData = Integer.parseInt(tmpColor);
+			if (ColorData > 0x1000000 || ColorData<0x000000) {
+				System.out.println("잘못된 Color String입니다.");
+			}
+			else {
+				int blue = ColorData % 0x100;
+				int green = ((ColorData-blue)%0x10000)/0x100;
+				int red = ((ColorData-blue)-green*0x100)/0x10000;
+
+				color = new Color(red, green, blue, 100);
+			}	
+		}
+    	this.color=color;
+    }
+    
     public Node getParent() {
     	return parent;
     }
@@ -81,5 +108,23 @@ public class Node {
        node.parent = this;
        this.children.add(node);
      }
-    
+    public void setColorFromStr (String colorString) {
+		String tmpColor = colorString;
+		Color color = null;
+
+		if (tmpColor != null) {
+			int ColorData = Integer.parseInt(tmpColor);
+			if (ColorData > 0x1000000 || ColorData<0x000000) {
+				System.out.println("잘못된 Color String입니다.");
+			}
+			else {
+				int blue = ColorData % 0x100;
+				int green = ((ColorData-blue)%0x10000)/0x100;
+				int red = ((ColorData-blue)-green*0x100)/0x10000;
+
+				color = new Color(red, green, blue, 100);
+			}	
+		}
+    	this.color=color;
+    }
 }
