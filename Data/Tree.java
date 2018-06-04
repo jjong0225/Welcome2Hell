@@ -124,7 +124,7 @@ public class Tree {
 ////              me.x += me.parent.x+(int)(Math.cos(t+(Math.PI/(n+1))*j)*10);
 ////           me.y += me.parent.y+(int)(Math.sin(t+(Math.PI/(n+1))*j)*10);
 //           
-//            //ÇöÀç ÃÖ¼±ÀÇ ÇØ°áÃ¥
+//            //Ã‡Ã¶Ã€Ã§ ÃƒÃ–Â¼Â±Ã€Ã‡ Ã‡Ã˜Â°Ã¡ÃƒÂ¥
 //           n = me.parent.children.size();
 //           d = Math.hypot(me.parent.x, me.parent.y);
 //           t = (-2.0/3.0)*Math.PI+Math.atan2( me.parent.y, me.parent.x);
@@ -222,6 +222,9 @@ public class Tree {
     	 if(now == root)
     		 exArray.add(root);
     	 
+         if(now.getChildren == null)
+    		 return null;
+
     	        Iterator<Node> it = now.getChildren().iterator();
 
     	        if (!it.hasNext())
