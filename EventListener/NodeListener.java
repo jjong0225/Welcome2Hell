@@ -25,17 +25,37 @@ public class NodeListener implements MouseListener{
 	Node dataNode;
 	int flag;
 	Point event;
-	
+	boolean drag = true;
 	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode) {
 		this.t = t;
 		this.mindmapArea = mindmapArea;
 		this.dataNode = dataNode;
 	}
 	public void mousePressed(MouseEvent e) {
+		drag = true;
 		event = new Point(e.getX(),e.getY());
-		System.out.println(event);
+		if(dataNode.getFocus() == false) {
+			dataNode.setColor(new Color(255-dataNode.getColor().getRed(),255-dataNode.getColor().getGreen(),255-dataNode.getColor().getBlue(),100));
+			ArrayList<Node> arr = new ArrayList<>();
+			t.makeArray(arr, t.getRoot());
+			Iterator<Node> it = arr.iterator();
+			Node n;
+			while(it.hasNext()) {
+				n = (Node)it.next();
+				if(n != dataNode)
+					if(n.getFocus() == true) {
+						n.setFocus(false);
+						n.setColor(new Color(255-n.getColor().getRed(),255-n.getColor().getGreen(),255-n.getColor().getBlue(),100));
+						break;
+					}
+			}
+			dataNode.setFocus(true);
+		}
+		
+		mindmapArea.repaint();
 	}
 	public void mouseReleased(MouseEvent e) {
+		drag = false;
 			Point p2 = new Point(e.getX(),e.getY());
 			int rec = 10;
 			flag = 1;
@@ -65,19 +85,20 @@ public class NodeListener implements MouseListener{
 			}
 			if(flag == 1) {
 				dataNode.setPoint(dataNode.getX() + p2.getX() - event.getX(), dataNode.getY() + p2.getY() - event.getY());
+//				dataNode.setPoint(dataNode.getX() - event.getX(), dataNode.getY() - event.getY());
 			}
-			if(p2.equals(event))
-				;
-			else {
-				mindmapArea.removeAll();
-				mindmapArea.revalidate();
-				mindmapArea.repaint();
-			}
+				
+			mindmapArea.removeAll();
+			mindmapArea.revalidate();
+			mindmapArea.repaint();
+	
 		
 		}
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("¿À¿ìšx!!!!!!!!!!!!!!!!!");
-		dataNode.setColor(new Color(255-dataNode.getColor().getRed(),255-dataNode.getColor().getGreen(),255-dataNode.getColor().getBlue(),100));
+		if(dataNode.getFocus() == true) {
+		dataNode.setColor(new Color(255-dataNode.getColor().getRed(), 255-dataNode.getColor().getGreen(), 255-dataNode.getColor().getBlue(), 100));
+		dataNode.setFocus(false);
+		}
 		mindmapArea.removeAll();
 		mindmapArea.revalidate();
 		mindmapArea.repaint();

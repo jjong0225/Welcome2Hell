@@ -132,17 +132,22 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import Data.Node;
+import Data.Point;
 import Data.Tree;
 import EventListener.NodeListener;
 
@@ -153,6 +158,13 @@ public class MindmapArea extends JPanel {
 	public MindmapArea(Tree mainTree, JFrame mainFrame) { 
 	this.mainTree = mainTree;
 	this.mainFrame = mainFrame;
+	//여기에 스크롤 패인을 추가하려 했으나 실패함
+//	setLayout(null);
+//	JScrollPane sp = new JScrollPane(this, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+//	setPreferredSize(new Dimension(4000,3000));
+//	add(this);
+	
+	
 	
 //	 mindmapPane.setLayout(null);
 //	 DrawingPane drawing = new DrawingPane(mainTree, mindmapPane, mainFrame);
@@ -185,7 +197,7 @@ public class MindmapArea extends JPanel {
         Iterator<Node> it = NodeArray.iterator();
         while(it.hasNext()) {
             Node dataNode = it.next();
-    		JLabel showNode =new JLabel((String)(dataNode.getInfo()));
+    		JLabel showNode =new JLabel(dataNode.getInfo());
 //    		System.out.println((String)dataNode.info);
     		
     		showNode.setBackground(dataNode.getColor());
@@ -196,21 +208,53 @@ public class MindmapArea extends JPanel {
     		showNode.setLocation((int)(dataNode.getX() + this.getSize().getWidth()/2), (int)(dataNode.getY() + this.getSize().getHeight()/2));    		
     		this.add(showNode);
     		showNode.setVisible(true);
-    		showNode.addMouseListener(new NodeListener(t,this, dataNode));
+    		showNode.addMouseListener(new NodeListener(t, this, dataNode));
+    		
     		showNode = null;
          	}
-//        it = NodeArray.iterator();
-//        while(it.hasNext()) {
-//        	Node dataNode = it.next();
-//        	int parentUp ;
-//        	int parentRight;
-//        	int parentLeft;
-//        	int parentDown;
-//        	int nodeUp;
-//        	int nodeDown;
-//        	int nodeLeft;
-//        	int nodeRight;
-//        }
+        it = NodeArray.iterator();
+        while(it.hasNext()) {
+        	Node n = it.next();
+        	if(n != t.getRoot()) {
+        		Point parentUp = new Point(n.getParent().getPoint().add(new Point(n.getParent().getWidth()/2,0)));
+        		Point parentDown = new Point(n.getParent().getPoint().add(new Point(n.getParent().getWidth()/2,n.getParent().getHeight())));
+        		Point parentLeft = new Point(n.getParent().getPoint().add(new Point(0,n.getParent().getHeight()/2)));
+        		Point parentRight = new Point(n.getParent().getPoint().add(new Point(n.getParent().getWidth(),n.getParent().getHeight()/2)));
+        		Point nodeUp = new Point(n.getPoint().add(new Point(n.getWidth()/2,0)));
+        		Point nodeDown = new Point(n.getPoint().add(new Point(n.getWidth()/2,n.getHeight())));
+        		Point nodeLeft = new Point(n.getPoint().add(new Point(0,n.getHeight()/2)));
+        		Point nodeRight = new Point(n.getPoint().add(new Point(n.getWidth(),n.getHeight()/2)));
+        		Point[] arrp = new Point[2];
+        		switch(n.compare(n.getParent())) {
+        		case 1:
+        			arrp = Point.showMeTheShortest(nodeUp, nodeRight, parentLeft, parentDown);
+        			g.drawArc((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
+        			break;
+        		case 2:
+        			arrp = Point.showMeTheShortest(nodeUp, nodeLeft, parentRight, parentDown);
+        			g.drawArc((int)(2*arrp[1].getX()-arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
+        			break;
+        		case 3:
+        			arrp = Point.showMeTheShortest(nodeLeft, nodeDown, parentUp, parentRight);
+        			g.drawArc((int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
+        			break;
+        		case 4:
+        			arrp = Point.showMeTheShortest(nodeDown, nodeRight, parentLeft, parentUp);
+        			g.drawArc((int)(2*arrp[0].getX()-arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
+        		break;
+        	default:
+        		}
+//        		g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
+        	}
+        	if(n.getFocus() == true) {
+        		g.fillOval((int)n.getX()+this.getWidth()/2-3, (int)n.getY()+this.getHeight()/2-3, 10, 10);
+        		g.fillOval((int)n.getX()+n.getWidth()+this.getWidth()/2-7, (int)n.getY()+this.getHeight()/2-3, 10, 10);
+        		g.fillOval((int)n.getX()+this.getWidth()/2-3, (int)n.getY()+n.getHeight()+this.getHeight()/2-7, 10, 10);
+        		g.fillOval((int)n.getX()+n.getWidth()+this.getWidth()/2-7, (int)n.getY()+n.getHeight()+this.getHeight()/2-7, 10, 10);
+        	}
+        	
+        	
+        }
         NodeArray = null;
 		}
 }
