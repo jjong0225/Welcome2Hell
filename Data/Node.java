@@ -133,7 +133,7 @@ public class Node {
 		Color color = null;
 
 		if (tmpColor != null) {
-			int ColorData = Integer.parseInt(tmpColor);
+			int ColorData = Integer.parseInt(tmpColor, 16);
 			if (ColorData > 0x1000000 || ColorData<0x000000) {
 				System.out.println("잘못된 Color String입니다.");
 			}
@@ -143,7 +143,7 @@ public class Node {
 				int red = ((ColorData-blue)-green*0x100)/0x10000;
 
 				color = new Color(red, green, blue, 100);
-			}	
+			}
 		}
     	this.color=color;
     }

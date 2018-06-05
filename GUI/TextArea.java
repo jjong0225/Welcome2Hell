@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class TextArea {
+public class TextArea extends JPanel{
 	public JTextArea textarea;
 	JPanel textPane;
 	JFrame mainFrame;
