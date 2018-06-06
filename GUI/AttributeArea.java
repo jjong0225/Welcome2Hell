@@ -8,15 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AttributeArea{
-	public JPanel attributePane;
-	public JTextField infoField = new JTextField();
-	public JTextField xField = new JTextField();
-	public JTextField yField = new JTextField();
-	public JTextField wField = new JTextField();
-	public JTextField hField = new JTextField();
-	public JTextField colorField = new JTextField();
-	
+public class AttributeArea {
+
+	JPanel attributePane;
 	public AttributeArea() {
 		attributePane = new JPanel();
 
@@ -27,22 +21,23 @@ public class AttributeArea{
 		attributeArea.setLayout(new GridLayout(6,2));
 
 		attributeArea.add(new JLabel("TEXT"));
-		attributeArea.add(infoField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("X"));
-		attributeArea.add(xField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("Y"));
-		attributeArea.add(yField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("W"));
-		attributeArea.add(wField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("H"));
-		attributeArea.add(hField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("Color"));
-		attributeArea.add(colorField);
+		attributeArea.add(new JTextField());
+
 
 
 		attributePane.setLayout(new BorderLayout());
@@ -50,4 +45,5 @@ public class AttributeArea{
 		attributePane.add(attributeArea, BorderLayout.CENTER);
 		attributePane.add(changeButton, BorderLayout.SOUTH);
 	}
+
 }
