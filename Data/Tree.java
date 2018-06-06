@@ -43,10 +43,6 @@ public class Tree {
         now = child;
     }
 
-    // I've made the above two methods of type void, not Node, because
-    // I see no reason in returning anything; however, you can override by calling
-    //'return root;' or 'return child;'
-
     public int numberOfNodesInTree(Node rootNode){
         int count=0;
 
@@ -73,83 +69,6 @@ public class Tree {
         this.root=newRoot;
     }
     
-//    public void show() {
-//        Iterator<Node> it;
-//        Node me;
-////        Iterator<Node> tmp;
-//        now = root;
-//        it = root.children.iterator();
-//        int i = 0;
-////        while(it.hasNext()) {
-////           double t = 2*Math.PI/root.children.size();
-////           me = it.next();
-////           me.x = (int)(Math.cos(t*i)*100);
-////           me.y = (int)(Math.sin(t*i)*100);
-////           i++;
-////           System.out.println((String)me.info+"("+me.x+", "+me.y+")");
-////        }
-//        while(it.hasNext()) {
-//            double theta = 2*Math.PI/root.children.size();
-//            me = it.next();
-//            me.x = 100;
-//            me.y = (int)(theta*i);
-//            i++;
-//            System.out.println((String)me.info+"("+me.x+", "+me.y+")");
-//         }
-//        System.out.println(root.info);
-//        ArrayList<Node> c;
-//        c = now.children;
-//        it = c.iterator();
-//        go2c(c,1);
-//     }
-//     
-//     public void go2c(ArrayList<Node> ca, int i) {
-//         Iterator<Node> it = ca.iterator();
-//         int n;
-//         double t;
-//         double d;
-//         int j=1;
-//        if (!it.hasNext())
-//           return;
-//        while(it.hasNext()) {
-//           Node me = it.next();
-//           for(int m=0; m<i ; m++) {
-//              System.out.print("   ");
-//           }
-////           n = me.parent.children.size();
-////           t = -Math.PI/2+Math.atan(me.parent.y/me.parent.x);
-////           if(me.parent.x < 0)
-////              me.x += me.parent.x-(int)(Math.cos(t+(Math.PI/(n+1))*j)*10);
-////           else
-////              me.x += me.parent.x+(int)(Math.cos(t+(Math.PI/(n+1))*j)*10);
-////           me.y += me.parent.y+(int)(Math.sin(t+(Math.PI/(n+1))*j)*10);
-//           
-//            //현재 최선의 해결책
-//           n = me.parent.children.size();
-//           d = Math.hypot(me.parent.x, me.parent.y);
-//           t = (-2.0/3.0)*Math.PI+Math.atan2( me.parent.y, me.parent.x);
-//           if(!(me.parent.x == 0 && me.parent.y == 0)) {
-//              me.x=(me.x +me.parent.x +(int)(Math.cos(t+(4.0/3.0*Math.PI/(double)(n+1))*j)*120));
-//              me.y=(me.y + me.parent.y+(int)(Math.sin(t+(4.0/3.0*Math.PI/(double)(n+1))*j)*120));
-//              if(me.parent.children.get(0) == me) {
-//            	  int temp = me.x;
-//            	  me.x = (int)(temp*Math.cos(Math.PI/36)-me.y*Math.sin(Math.PI/36));
-//            	  me.y = (int)(temp*Math.sin(Math.PI/36)+me.y*Math.cos(Math.PI/36));
-//              }
-//              if(me.parent.children.get(n-1) == me) {
-//            	  int temp = me.x;
-//            	  me.x = (int)(temp*Math.cos(-Math.PI/36)-me.y*Math.sin(-Math.PI/36));
-//            	  me.y = (int)(temp*Math.sin(-Math.PI/36)+me.y*Math.cos(-Math.PI/36));
-//              }
-//            	 
-//           
-//           
-//           }
-//            j++;
-//           System.out.println((String)me.info+"("+me.x+", "+me.y+")");
-//           go2c(me.children, i+1);
-//        }
-//     }
     
     public void show() {
         Iterator<Node> it;
@@ -171,7 +90,11 @@ public class Tree {
         go2c(c,1);
      }
      
-     public void go2c(ArrayList<Node> ca, int i) {
+     public void go2c(ArrayList<Node> ca, int i) 
+     {
+    	 if(ca == null)
+    		 return;
+
          Iterator<Node> it = ca.iterator();
         if (!it.hasNext())
            return;
@@ -222,6 +145,9 @@ public class Tree {
     	 if(now == root)
     		 exArray.add(root);
     	 
+         if(now.getChildren() == null)
+    		 return null;
+
     	        Iterator<Node> it = now.getChildren().iterator();
 
     	        if (!it.hasNext())

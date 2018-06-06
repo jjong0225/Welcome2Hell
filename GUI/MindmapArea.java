@@ -228,23 +228,48 @@ public class MindmapArea extends JPanel {
         		switch(n.compare(n.getParent())) {
         		case 1:
         			arrp = Point.showMeTheShortest(nodeUp, nodeRight, parentLeft, parentDown);
-        			g.drawArc((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
+        			if((arrp[0] == nodeRight && arrp[1] == parentLeft) || (arrp [0] == nodeUp && arrp[1] == parentDown))
+        				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
+        			else if(arrp[0] == nodeRight && arrp[1] == parentDown)
+        				g.drawArc((int)(2 * arrp[0].getX() - arrp[1].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[1].getY() - arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),270,90);
+        			else
+        				g.drawArc((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
         			break;
         		case 2:
         			arrp = Point.showMeTheShortest(nodeUp, nodeLeft, parentRight, parentDown);
-        			g.drawArc((int)(2*arrp[1].getX()-arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
+        			if((arrp[0] == nodeLeft && arrp[1] == parentRight) || (arrp [0] == nodeUp && arrp[1] == parentDown))
+        				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
+        			else if(arrp[0] == nodeUp && arrp[1] == parentRight)
+        				g.drawArc((int)(2*arrp[1].getX()-arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
+        			else
+        				g.drawArc((int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[1].getY() - arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),180,90);
         			break;
+        			
+        			
         		case 3:
         			arrp = Point.showMeTheShortest(nodeLeft, nodeDown, parentUp, parentRight);
-        			g.drawArc((int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
+        			if((arrp[0] == nodeLeft && arrp[1] == parentRight) || (arrp [0] == nodeDown && arrp[1] == parentUp))
+        				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
+        			else if(arrp[0] == nodeLeft && arrp[1] == parentUp)
+        				g.drawArc((int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
+        			else
+        				g.drawArc((int)(2 * arrp[1].getX() - arrp[0].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[0].getY() - arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),270,90);
         			break;
+        			
+        			
         		case 4:
         			arrp = Point.showMeTheShortest(nodeDown, nodeRight, parentLeft, parentUp);
-        			g.drawArc((int)(2*arrp[0].getX()-arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
-        		break;
+        			if((arrp[0] == nodeRight && arrp[1] == parentLeft) || (arrp [0] == nodeDown && arrp[1] == parentUp))
+        				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
+        			else if(arrp[0] == nodeRight && arrp[1] == parentUp)
+        				g.drawArc((int)(2*arrp[0].getX()-arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
+        			else
+        				g.drawArc((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[0].getY() - arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),180,90);
+        			break;
+        			
+        		
         	default:
         		}
-//        		g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
         	}
         	if(n.getFocus() == true) {
         		g.fillOval((int)n.getX()+this.getWidth()/2-3, (int)n.getY()+this.getHeight()/2-3, 10, 10);
