@@ -1,23 +1,11 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Rectangle;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
-import javax.swing.JToolBar;
-
+import javax.swing.*;
 import Data.Tree;
 import EventListener.FrameResizedListener;
 import EventListener.MindmapListener;
+
+import java.awt.*;
 
 public class FrameGUI extends JFrame {
 	JFrame mainFrame;
@@ -74,16 +62,13 @@ public class FrameGUI extends JFrame {
 
 
 //....................................................................		
-		// ¸¶ÀÎµå¸Ê ÆÇ³Ú
-
-		mindmapArea = new MindmapArea(mainTree, mainFrame);
-		mindmapArea.addMouseListener(new MindmapListener(mainTree, mindmapArea));
-//		mindmapArea.mindmapPane.setLayout(null);
-//		
-				
-//....................................................................		
 		// ¼Ó¼º ÆÇ³Ú
 		AttributeArea attributeArea = new AttributeArea();
+
+//....................................................................		
+		// ¸¶ÀÎµå¸Ê ÆÇ³Ú
+		mindmapArea = new MindmapArea(mainTree, mainFrame, attributeArea);
+		mindmapArea.addMouseListener(new MindmapListener(mainTree, mindmapArea));
 
 
 //....................................................................		

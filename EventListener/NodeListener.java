@@ -26,11 +26,15 @@ public class NodeListener implements MouseListener{
 	int flag;
 	Point event;
 	boolean drag = true;
-	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode) {
+	AttributeArea attributeArea;
+	
+	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode, AttributeArea attributeArea) {
 		this.t = t;
 		this.mindmapArea = mindmapArea;
 		this.dataNode = dataNode;
+		this.attributeArea = attributeArea;
 	}
+
 	public void mousePressed(MouseEvent e) {
 		drag = true;
 		event = new Point(e.getX(),e.getY());
@@ -52,7 +56,13 @@ public class NodeListener implements MouseListener{
 			dataNode.setFocus(true);
 		}
 		
-		mindmapArea.repaint();
+		mindmapArea.repaint();		attributeArea.xField.setText(dataNode.getInfo());
+		attributeArea.xField.setText(Double.toString(dataNode.getX()));
+		attributeArea.yField.setText(Double.toString(dataNode.getY()));
+		attributeArea.wField.setText(Integer.toString(dataNode.getWidth()));
+		attributeArea.hField.setText(Integer.toString(dataNode.getHeight()));
+		attributeArea.colorField.setText(Integer.toHexString(((dataNode.getColor().getRGB() - dataNode.getColor().getAlpha())/0x100)));
+		// node 정보 출력
 	}
 	public void mouseReleased(MouseEvent e) {
 		drag = false;
@@ -112,7 +122,6 @@ public class NodeListener implements MouseListener{
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
-	}
-	
+	}	
 
 }
