@@ -23,8 +23,6 @@ public class JsonHandler {
 		JSONArray nowArray = (JSONArray)jsonObject.get("Children");
 		mainTree.getRoot().setChildren(array2Data(nowArray, mainTree.getRoot()));
 		getParent(mainTree.getRoot().getChildren(), mainTree.getRoot());
-
-
 	}
 	
 	public static ArrayList<Node> array2Data(JSONArray childrenArray, Node parent) {
@@ -42,7 +40,6 @@ public class JsonHandler {
 			JSONObject JOBData = (JSONObject) nowJOB.get("Data");
 			JSONArray newChildrenArray = (JSONArray)nowJOB.get("Children");
 			Node nowNode = new Node((String)JOBData.get("info"));
-
 			double x = (double) JOBData.get("x");
 			nowNode.setX(x);
 			nowNode.setY((double) JOBData.get("y"));
@@ -59,7 +56,6 @@ public class JsonHandler {
 			}
 			returnArray.add(nowNode);
 		}
-
 		return returnArray;
 	}
 	
@@ -76,14 +72,12 @@ public class JsonHandler {
 		
 		while(iterator.hasNext()) {
 			Node node = iterator.next();
-
 			System.out.println(node.getX());
 			node.setParent(parent);
 			if (node.getChildren() != null) {
 				getParent(node.getChildren(), node);
 			}
 			else {
-
 			}
 		}
 }
@@ -104,11 +98,9 @@ public class JsonHandler {
 			rootObj.put("y", mainTree.getRoot().getY());
 			rootObj.put("w", mainTree.getRoot().getWidth());
 			rootObj.put("h", mainTree.getRoot().getHeight());
-
 			rootObj.put("color", Integer.toHexString((mainTree.getRoot().getColor().getRGB()-mainTree.getRoot().getColor().getAlpha())/0x100));
 
-
-			//child Ìò∏Ï∂ú
+			//child »£√‚
 			if(mainTree.getRoot().getChildren() != null && mainTree.getRoot().getChildren().get(0) != null) {
 				JSONArray children =Tree2JObj(mainTree.getRoot(), mainTree.getRoot().getChildren(), head);
 				head.put("Data", rootObj);
@@ -121,14 +113,13 @@ public class JsonHandler {
 		}		
 		
 		try {
-			FileWriter file = new FileWriter("C:\\Users\\JongHoon\\Desktop\\Ïà≠Ïã§ÎåÄ\\2-1\\Í∞ùÏ≤¥\\saveTest.json");
+			FileWriter file = new FileWriter("C:\\Users\\JongHoon\\Desktop\\º˛Ω«¥Î\\2-1\\∞¥√º\\saveTest.json");
 			file.write(head.toJSONString());
 			file.flush();
 			file.close();
 			System.out.println("saved");
 			
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		
@@ -157,9 +148,8 @@ public class JsonHandler {
 				dataObj.put("parent", nowNode.getParent().getInfo());
 				dataObj.put("info", nowNode.getInfo());
 				dataObj.put("x", nowNode.getX());
-
 				double y = nowNode.getY();
-				if (y<1) {
+				if (y<1 && y>-1) {
 					y = 0;
 				}
 				dataObj.put("y", y) ;
@@ -167,9 +157,8 @@ public class JsonHandler {
 				dataObj.put("h", nowNode.getHeight());
 				dataObj.put("color",Integer.toHexString((nowNode.getColor().getRGB()-nowNode.getColor().getAlpha())/0x100));
 				
-
 				JSONArray children = null;
-				//child Ìò∏Ï∂ú
+				//child »£√‚
 				if(nowNode.getChildren() != null) {
 					children = Tree2JObj (root, nowNode.getChildren(), head);
 					returnObj.put("Data", dataObj);
@@ -179,7 +168,7 @@ public class JsonHandler {
 					returnObj.put("Data", dataObj);
 					returnObj.put("Children", null);			
 				}
-				//arrayÏóê Ï∂îÍ∞Ä
+				//arrayø° √ﬂ∞°
 				JArray.add(returnObj);
 			}
 		return JArray;

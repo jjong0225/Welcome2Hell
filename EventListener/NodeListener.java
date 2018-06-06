@@ -55,8 +55,10 @@ public class NodeListener implements MouseListener{
 			}
 			dataNode.setFocus(true);
 		}
-		
-		mindmapArea.repaint();		attributeArea.xField.setText(dataNode.getInfo());
+		AttributeListener.me = dataNode;
+		mindmapArea.repaint();
+		attributeArea.infoField.setEditable(false);
+		attributeArea.infoField.setText(dataNode.getInfo());
 		attributeArea.xField.setText(Double.toString(dataNode.getX()));
 		attributeArea.yField.setText(Double.toString(dataNode.getY()));
 		attributeArea.wField.setText(Integer.toString(dataNode.getWidth()));
@@ -80,24 +82,18 @@ public class NodeListener implements MouseListener{
 			
 			
 			if(flag%2==0) {
-				if(p2.getY() < dataNode.getHeight()) {
 				dataNode.setY(dataNode.getY() + p2.getY() - event.getY());
 				dataNode.setHeight((int) (dataNode.getHeight() + event.getY() - p2.getY()));
-				}
 			}
 			if(flag%3==0) {
-				if(p2.getY() > 0)
-					dataNode.setHeight((int) (dataNode.getHeight() + p2.getY() - event.getY()));
+				dataNode.setHeight((int) (dataNode.getHeight() + p2.getY() - event.getY()));
 			}
 			if(flag%5==0) {
-				if(p2.getX() < dataNode.getWidth()) {
-					dataNode.setX(dataNode.getX() + p2.getX() - event.getX());
-					dataNode.setWidth((int) (dataNode.getWidth() + event.getX() - p2.getX()));
-				}
+				dataNode.setX(dataNode.getX() + p2.getX() - event.getX());
+				dataNode.setWidth((int) (dataNode.getWidth() + event.getX() - p2.getX()));
 			}
 			if(flag%7==0) {
-				if(p2.getX() > 0)
-					dataNode.setWidth((int) (dataNode.getWidth() + p2.getX() - event.getX()));
+				dataNode.setWidth((int) (dataNode.getWidth() + p2.getX() - event.getX()));
 			}
 			if(flag == 1) {
 				dataNode.setPoint(dataNode.getX() + p2.getX() - event.getX(), dataNode.getY() + p2.getY() - event.getY());

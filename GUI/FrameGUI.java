@@ -4,6 +4,7 @@ import javax.swing.*;
 import Data.Tree;
 import EventListener.FrameResizedListener;
 import EventListener.MindmapListener;
+import EventListener.PanelResizedListener;
 
 import java.awt.*;
 
@@ -69,6 +70,14 @@ public class FrameGUI extends JFrame {
 		// ¸¶ÀÎµå¸Ê ÆÇ³Ú
 		mindmapArea = new MindmapArea(mainTree, mainFrame, attributeArea);
 		mindmapArea.addMouseListener(new MindmapListener(mainTree, mindmapArea));
+		mindmapArea.addComponentListener(new PanelResizedListener(mindmapArea));
+		JScrollPane scroll = new JScrollPane(mindmapArea);
+		scroll.setBounds(0, 0, 600, 300);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        mindmapArea.setScroll(scroll);
+        attributeArea.setMindemapArea(mindmapArea);
+        scroll.getVerticalScrollBar().setValue(300);
 
 
 //....................................................................		
@@ -84,13 +93,13 @@ public class FrameGUI extends JFrame {
         splitPane2.setDividerLocation((WMF/2));
         
         splitPane1.setLeftComponent(textArea.textPane); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
-        splitPane2.setLeftComponent(mindmapArea); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
+        splitPane2.setLeftComponent(scroll); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
         splitPane2.setRightComponent(attributeArea.attributePane); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
         
         
         
   //....................................................................		
-		textArea.applyButton.addActionListener(new EventListener.ApplyMap(mindmapArea, mainTree));
+		textArea.applyButton.addActionListener(new EventListener.ApplyMap(mindmapArea, mainTree, mindmapArea));
 		textArea.applyButton.addActionListener(new EventListener.ApplyListener(textArea.textarea, mainTree));
 		mainFrame.addComponentListener(new FrameResizedListener(mindmapArea));
 
