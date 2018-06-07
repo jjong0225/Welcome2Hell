@@ -134,6 +134,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -142,7 +143,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+
 import javax.swing.JViewport;
+
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -154,11 +157,15 @@ import EventListener.NodeListener;
 public class MindmapArea extends JPanel {
 	Tree mainTree;
 	JFrame mainFrame;
+
+	AttributeArea attributeArea;
+	public JScrollPane scroll;
+
 	
-	public MindmapArea(Tree mainTree, JFrame mainFrame) { 
+	public MindmapArea(Tree mainTree, JFrame mainFrame) {
 	this.mainTree = mainTree;
 	this.mainFrame = mainFrame;
-	//¿©±â¿¡ ½ºÅ©·Ñ ÆÐÀÎÀ» Ãß°¡ÇÏ·Á ÇßÀ¸³ª ½ÇÆÐÇÔ
+	//ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //	setLayout(null);
 //	JScrollPane sp = new JScrollPane(this, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //	setPreferredSize(new Dimension(4000,3000));
@@ -177,14 +184,17 @@ public class MindmapArea extends JPanel {
 //	 mindmapPane.setBackground(Color.GRAY);
 	}
 	
-//	public void setMindmapPane(JPanel mindmapPane) {
-//		this.mindmapPane = mindmapPane;
-//	}
-	
+
+	public void setScroll(JScrollPane scroll)
+	{
+		this.scroll = scroll;
+	}
+
 	
 	public void paintComponent(Graphics g) {
+		this.removeAll();
+		this.revalidate();
 		super.paintComponent(g);
-//		mindmapPane.removeAll();
 		ArrayList<Node> NodeArray = new ArrayList<Node>();
 		
 		Tree t = mainTree;
@@ -193,9 +203,29 @@ public class MindmapArea extends JPanel {
 			return;
 		
 		t.makeArray(NodeArray,t.getRoot());
+		double maxX=0,maxY =0;
+		double minX=0,minY=0;
+		double sumX=0,sumY=0;
+		Iterator iterator = NodeArray.iterator();
+		while(iterator.hasNext()) {
+			Node now = (Node)iterator.next();
+			if(maxX < now.getX())
+				maxX = now.getX();
+			if(minX > now.getX())
+				minX = now.getX();
+			if(maxY < now.getY())
+				maxY = now.getY();
+			if(minY > now.getY())
+				minY = now.getY();
+		}
+		sumX = (maxX-minX)*2 + 100;
+		sumY = (maxY-minY)*2 + 100;
+		this.setPreferredSize(new Dimension((int)sumX, (int)sumY));
+
+
 		
         Iterator<Node> it = NodeArray.iterator();
-        while(it.hasNext()) {
+        	while(it.hasNext()) {
             Node dataNode = it.next();
     		JLabel showNode =new JLabel(dataNode.getInfo());
 //    		System.out.println((String)dataNode.info);
@@ -212,7 +242,7 @@ public class MindmapArea extends JPanel {
     		
     		showNode = null;
          	}
-        it = NodeArray.iterator();
+        it = NodeArray.iterator();	
         while(it.hasNext()) {
         	Node n = it.next();
         	if(n != t.getRoot()) {
@@ -264,6 +294,7 @@ public class MindmapArea extends JPanel {
         			break;
         	default:
         		}
+//        		g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
         	}
         	if(n.getFocus() == true) {
         		g.fillOval((int)n.getX()+this.getWidth()/2-3, (int)n.getY()+this.getHeight()/2-3, 10, 10);
@@ -271,7 +302,6 @@ public class MindmapArea extends JPanel {
         		g.fillOval((int)n.getX()+this.getWidth()/2-3, (int)n.getY()+n.getHeight()+this.getHeight()/2-7, 10, 10);
         		g.fillOval((int)n.getX()+n.getWidth()+this.getWidth()/2-7, (int)n.getY()+n.getHeight()+this.getHeight()/2-7, 10, 10);
         	}
-        	
         	
         }
         NodeArray = null;

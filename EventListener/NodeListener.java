@@ -51,8 +51,18 @@ public class NodeListener implements MouseListener{
 			}
 			dataNode.setFocus(true);
 		}
+
+		AttributeListener.me = dataNode;
 		mindmapArea.repaint();
-			
+		attributeArea.infoField.setEditable(false);
+		attributeArea.infoField.setText(dataNode.getInfo());
+		attributeArea.xField.setText(Double.toString(dataNode.getX()));
+		attributeArea.yField.setText(Double.toString(dataNode.getY()));
+		attributeArea.wField.setText(Integer.toString(dataNode.getWidth()));
+		attributeArea.hField.setText(Integer.toString(dataNode.getHeight()));
+		attributeArea.colorField.setText(Integer.toHexString(((dataNode.getColor().getRGB() - dataNode.getColor().getAlpha())/0x100)));
+		// node Á¤º¸ Ãâ·Â
+
 	}
 	public void mouseReleased(MouseEvent e) {
 		drag = false;
