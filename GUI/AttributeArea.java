@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+
 import EventListener.AttributeListener;
 
 public class AttributeArea{
@@ -21,33 +22,35 @@ public class AttributeArea{
 	public JTextField colorField = new JTextField();
 	JButton changeButton;
 	
+
 	public AttributeArea() {
 		attributePane = new JPanel();
 		
 		JLabel nameText2 = new JLabel ("Attribute Pane");
-		changeButton = new JButton("Àû¿ë");
+		changeButton = new JButton("Å”Å±Å¼Ã«");
 		changeButton.addActionListener(new AttributeListener(this, null));
 		JPanel attributeArea = new JPanel();
 
 		attributeArea.setLayout(new GridLayout(6,2));
 
 		attributeArea.add(new JLabel("TEXT"));
-		attributeArea.add(infoField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("X"));
-		attributeArea.add(xField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("Y"));
-		attributeArea.add(yField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("W"));
-		attributeArea.add(wField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("H"));
-		attributeArea.add(hField);
+		attributeArea.add(new JTextField());
 
 		attributeArea.add(new JLabel("Color"));
-		attributeArea.add(colorField);
+		attributeArea.add(new JTextField());
+
 
 
 		attributePane.setLayout(new BorderLayout());
@@ -55,9 +58,10 @@ public class AttributeArea{
 		attributePane.add(attributeArea, BorderLayout.CENTER);
 		attributePane.add(changeButton, BorderLayout.SOUTH);
 	}
-	
+
 	public void setMindemapArea(MindmapArea mindmapArea) {
 		this.mindmapArea = mindmapArea;
 		changeButton.addActionListener(new AttributeListener(this, mindmapArea));
 	}
+
 }

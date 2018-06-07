@@ -1,12 +1,24 @@
 package GUI;
 
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JSplitPane;
+import javax.swing.JTextArea;
+import javax.swing.JToolBar;
+
 import Data.Tree;
 import EventListener.FrameResizedListener;
 import EventListener.MindmapListener;
 import EventListener.PanelResizedListener;
-
-import java.awt.*;
 
 public class FrameGUI extends JFrame {
 	JFrame mainFrame;
@@ -20,7 +32,7 @@ public class FrameGUI extends JFrame {
 		this.mainTree = mainTree;
 
 //....................................................................		
-		// ÇÁ·¹ÀÓ »ı¼º
+		// í”„ë ˆì„ ìƒì„±
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Container conPane = mainFrame.getContentPane();
 		conPane.setLayout(new BorderLayout(0,0));
@@ -33,10 +45,10 @@ public class FrameGUI extends JFrame {
         Dimension eachDimension = new Dimension ((HMF-200) , WMF/3);
 
 //....................................................................		
-		//¸Ş´º¹Ù »ı¼º
+		//ë©”ë‰´ë°” ìƒì„±
 		JMenuBar menubar = new JMenuBar();
 		
-		// ¸Ş´º¹Ù ¸ñ·Ï »ı¼º
+		// ë©”ë‰´ë°” ëª©ë¡ ìƒì„±
 		JMenu menu1 = new JMenu("1");
 			JMenuItem menu1item1 = new JMenuItem("m1 i1");
 			menu1.add(menu1item1);
@@ -45,10 +57,10 @@ public class FrameGUI extends JFrame {
 //		JMenu menu3 = new JMenu("3");
 //		JMenu menu4 = new JMenu("4");
 			
-		//¸Ş´º¹Ù ¼¼ÆÃ
+		//ë©”ë‰´ë°” ì„¸íŒ…
 		mainFrame.setJMenuBar(menubar);
 //....................................................................		
-		//Åø¹Ù »ı¼º
+		//íˆ´ë°” ìƒì„±
 		JToolBar toolbar = new JToolBar("ToolBar");
 		toolbar.setBackground(Color.black);
 		toolbar.add(new JButton("ti1"));
@@ -57,19 +69,17 @@ public class FrameGUI extends JFrame {
 		
 
 //....................................................................						
-		// ÅØ½ºÆ® ¿¡µğÅÍ ÆäÀÎ
+		// í…ìŠ¤íŠ¸ ì—ë””í„° í˜ì¸
 		
 		TextArea textArea = new TextArea(mainFrame);
 
 
 //....................................................................		
-		// ¼Ó¼º ÆÇ³Ú
-		AttributeArea attributeArea = new AttributeArea();
+		// ë§ˆì¸ë“œë§µ íŒë„¬
 
-//....................................................................		
-		// ¸¶ÀÎµå¸Ê ÆÇ³Ú
-		mindmapArea = new MindmapArea(mainTree, mainFrame, attributeArea);
+		mindmapArea = new MindmapArea(mainTree, mainFrame);
 		mindmapArea.addMouseListener(new MindmapListener(mainTree, mindmapArea));
+
 		mindmapArea.addComponentListener(new PanelResizedListener(mindmapArea));
 		JScrollPane scroll = new JScrollPane(mindmapArea);
 		scroll.setBounds(0, 0, 600, 300);
@@ -82,19 +92,19 @@ public class FrameGUI extends JFrame {
 
 //....................................................................		
 		
-		// µ¥ÀÌÅÍ ºÎºĞ
+		// ë°ì´í„° ë¶€ë¶„
         JSplitPane splitPane1 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT); 
         splitPane2 = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT); 
         
-        splitPane1.setRightComponent(splitPane2); //¿ìÃø ÄÄÆ÷³ÍÆ® ÀåÂø
+        splitPane1.setRightComponent(splitPane2); //ìš°ì¸¡ ì»´í¬ë„ŒíŠ¸ ì¥ì°©
         
         System.out.println(WMF);
         splitPane1.setDividerLocation(WMF/4);
         splitPane2.setDividerLocation((WMF/2));
         
-        splitPane1.setLeftComponent(textArea.textPane); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
-        splitPane2.setLeftComponent(scroll); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
-        splitPane2.setRightComponent(attributeArea.attributePane); //ÁÂÃø ÄÄÆ÷³ÍÆ® ÀåÂø
+        splitPane1.setLeftComponent(textArea.textPane); //ì¢Œì¸¡ ì»´í¬ë„ŒíŠ¸ ì¥ì°©
+        splitPane2.setLeftComponent(scroll); //ì¢Œì¸¡ ì»´í¬ë„ŒíŠ¸ ì¥ì°©
+        splitPane2.setRightComponent(attributeArea.attributePane); //ì¢Œì¸¡ ì»´í¬ë„ŒíŠ¸ ì¥ì°©
         
         
         

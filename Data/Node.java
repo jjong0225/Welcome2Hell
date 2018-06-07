@@ -38,7 +38,7 @@ public class Node {
 		if (tmpColor != null) {
 			int ColorData = Integer.parseInt(tmpColor);
 			if (ColorData > 0x1000000 || ColorData<0x000000) {
-				System.out.println("Àß¸øµÈ Color StringÀÔ´Ï´Ù.");
+				System.out.println("ìž˜ëª»ëœ Color Stringìž…ë‹ˆë‹¤.");
 			}
 			else {
 				int blue = ColorData % 0x100;
@@ -133,9 +133,11 @@ public class Node {
 		Color color = null;
 
 		if (tmpColor != null) {
+
 			int ColorData = Integer.parseInt(tmpColor, 16);
+
 			if (ColorData > 0x1000000 || ColorData<0x000000) {
-				System.out.println("Àß¸øµÈ Color StringÀÔ´Ï´Ù.");
+				System.out.println("ìž˜ëª»ëœ Color Stringìž…ë‹ˆë‹¤.");
 			}
 			else {
 				int blue = ColorData % 0x100;
@@ -143,7 +145,9 @@ public class Node {
 				int red = ((ColorData-blue)-green*0x100)/0x10000;
 
 				color = new Color(red, green, blue, 100);
+
 			}
+
 		}
     	this.color=color;
     }

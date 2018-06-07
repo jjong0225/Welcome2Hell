@@ -26,15 +26,11 @@ public class NodeListener implements MouseListener{
 	int flag;
 	Point event;
 	boolean drag = true;
-	AttributeArea attributeArea;
-	
-	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode, AttributeArea attributeArea) {
+	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode) {
 		this.t = t;
 		this.mindmapArea = mindmapArea;
 		this.dataNode = dataNode;
-		this.attributeArea = attributeArea;
 	}
-
 	public void mousePressed(MouseEvent e) {
 		drag = true;
 		event = new Point(e.getX(),e.getY());
@@ -55,6 +51,7 @@ public class NodeListener implements MouseListener{
 			}
 			dataNode.setFocus(true);
 		}
+
 		AttributeListener.me = dataNode;
 		mindmapArea.repaint();
 		attributeArea.infoField.setEditable(false);
@@ -64,7 +61,8 @@ public class NodeListener implements MouseListener{
 		attributeArea.wField.setText(Integer.toString(dataNode.getWidth()));
 		attributeArea.hField.setText(Integer.toString(dataNode.getHeight()));
 		attributeArea.colorField.setText(Integer.toHexString(((dataNode.getColor().getRGB() - dataNode.getColor().getAlpha())/0x100)));
-		// node Á¤º¸ Ãâ·Â
+		// node ÃÂ¤ÂºÂ¸ ÃƒÃ¢Â·Ã‚
+
 	}
 	public void mouseReleased(MouseEvent e) {
 		drag = false;
@@ -82,18 +80,24 @@ public class NodeListener implements MouseListener{
 			
 			
 			if(flag%2==0) {
+				if(p2.getY() < dataNode.getHeight()) {
 				dataNode.setY(dataNode.getY() + p2.getY() - event.getY());
 				dataNode.setHeight((int) (dataNode.getHeight() + event.getY() - p2.getY()));
+				}
 			}
 			if(flag%3==0) {
-				dataNode.setHeight((int) (dataNode.getHeight() + p2.getY() - event.getY()));
+				if(p2.getY() > 0)
+					dataNode.setHeight((int) (dataNode.getHeight() + p2.getY() - event.getY()));
 			}
 			if(flag%5==0) {
-				dataNode.setX(dataNode.getX() + p2.getX() - event.getX());
-				dataNode.setWidth((int) (dataNode.getWidth() + event.getX() - p2.getX()));
+				if(p2.getX() < dataNode.getWidth()) {
+					dataNode.setX(dataNode.getX() + p2.getX() - event.getX());
+					dataNode.setWidth((int) (dataNode.getWidth() + event.getX() - p2.getX()));
+				}
 			}
 			if(flag%7==0) {
-				dataNode.setWidth((int) (dataNode.getWidth() + p2.getX() - event.getX()));
+				if(p2.getX() > 0)
+					dataNode.setWidth((int) (dataNode.getWidth() + p2.getX() - event.getX()));
 			}
 			if(flag == 1) {
 				dataNode.setPoint(dataNode.getX() + p2.getX() - event.getX(), dataNode.getY() + p2.getY() - event.getY());
@@ -118,6 +122,7 @@ public class NodeListener implements MouseListener{
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
-	}	
+	}
+	
 
 }
