@@ -21,7 +21,9 @@ public class Node {
         h=40;
         w=60;
         focus = false;
-        color= new Color(255,255,255,100);
+
+        color= new Color(255,255,255,50);
+
         children  = new ArrayList<Node>();
     }
     
@@ -38,7 +40,7 @@ public class Node {
 		if (tmpColor != null) {
 			int ColorData = Integer.parseInt(tmpColor);
 			if (ColorData > 0x1000000 || ColorData<0x000000) {
-				System.out.println("Àß¸øµÈ Color StringÀÔ´Ï´Ù.");
+				System.out.println("ìž˜ëª»ëœ Color Stringìž…ë‹ˆë‹¤.");
 			}
 			else {
 				int blue = ColorData % 0x100;
@@ -135,7 +137,7 @@ public class Node {
 		if (tmpColor != null) {
 			int ColorData = Integer.parseInt(tmpColor, 16);
 			if (ColorData > 0x1000000 || ColorData<0x000000) {
-				System.out.println("Àß¸øµÈ Color StringÀÔ´Ï´Ù.");
+				System.out.println("ìž˜ëª»ëœ Color Stringìž…ë‹ˆë‹¤.");
 			}
 			else {
 				int blue = ColorData % 0x100;

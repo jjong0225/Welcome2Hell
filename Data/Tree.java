@@ -79,7 +79,7 @@ public class Tree {
         while(it.hasNext()) {
             double theta = 2*Math.PI/root.getChildren().size();
             me = it.next();
-            me.setPoint(100, theta*i);
+            me.setPoint(120, theta*i);
             i++;
             System.out.println((String)me.getInfo()+"("+me.getX()+", "+me.getY()+")");
          }
@@ -103,8 +103,10 @@ public class Tree {
            for(int m=0; m<i ; m++) {
               System.out.print("   ");
            }
-           
-           me.setColor(new Color((50*i)%256,(100*i)%256,(150*i)%256,100));
+
+           int rand = (int)Math.pow(i, 2) - i + 41;
+           me.setColor(new Color((int)Math.pow(rand, 2)%256, (int)Math.pow(rand, 3)%256, (int)Math.pow(rand, 5)%256,50));
+
            List<Integer> list = new ArrayList<Integer>();
            Node node;
            node = me;
@@ -123,7 +125,7 @@ public class Tree {
            angle = angle * (root.getChildren().size()+1)/root.getChildren().size();
            
            if(me.getParent() != root) {
-        	   me.setPoint(i * 110, me.getY()+(me.getParent().getY() - angle*(me.getParent().getChildren().size()+1)/2)+angle*(me.getParent().getChildren().indexOf(me)+1));
+        	   me.setPoint(i * 120, me.getY()+(me.getParent().getY() - angle*(me.getParent().getChildren().size()+1)/2)+angle*(me.getParent().getChildren().indexOf(me)+1));
            }
 
            System.out.println(i+(String)me.getInfo()+"("+me.getX()+", "+me.getY()+")");

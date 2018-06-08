@@ -17,12 +17,14 @@ public class MainClass {
 	
 	public static void main (String[] args) {
 		
+
 	    Tree mainTree = new Tree();	
 	    JSONObject jsonObject = null;
 	    
-//		//jsonObject´Â ¸ğµç jasnoObject¸¦ °¡¸®Å°´Â ÂüÁ¶º¯¼ö
+//		//jsonObjectëŠ” ëª¨ë“  jasnoObjectë¥¼ ê°€ë¦¬í‚¤ëŠ” ì°¸ì¡°ë³€ìˆ˜
 //		try {
-//			jsonObject = (JSONObject)parser.parse(new FileReader("C:\\Users\\JongHoon\\Desktop\\¼ş½Ç´ë\\2-1\\°´Ã¼\\saveTest.json"));
+//			jsonObject = (JSONObject)parser.parse(new FileReader("C:\\Users\\JongHoon\\Desktop\\ìˆ­ì‹¤ëŒ€\\2-1\\ê°ì²´\\saveTest.json"));
+
 //		} 
 //		catch (FileNotFoundException e) {
 //			// TODO Auto-generated catch block
@@ -36,7 +38,9 @@ public class MainClass {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+
 //		JsonHandler.loadJson(jsonObject, mainTree);		
+
 		JFrame mainFrame = new JFrame();
 		GUI.FrameGUI GUI = new GUI.FrameGUI(mainFrame, mainTree);
 //		new TreeStructure(GUI,mainTree);		
