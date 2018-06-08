@@ -18,7 +18,7 @@ public class FrameResizedListener implements ComponentListener  {
   public void componentResized(ComponentEvent ce) {
 	  	  mindmapArea.removeAll();	  
 	  mindmapArea.revalidate();
-	  mindmapArea.repaint();
+//	  mindmapArea.repaint();
 		System.out.println("repainted");
   };
 }

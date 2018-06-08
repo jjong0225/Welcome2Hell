@@ -102,11 +102,11 @@ public class MindmapListener implements MouseListener {
 				while(it.hasNext()) {
 					n = (Node)it.next();
 					if(n.getFocus() == true) {
-						n.setColor(new Color(255-n.getColor().getRed(), 255 - n.getColor().getGreen(), 255 - n.getColor().getBlue(), 100));
+						n.setColor(new Color(255-n.getColor().getRed(), 255 - n.getColor().getGreen(), 255 - n.getColor().getBlue(), 50));
 						n.setFocus(false);
 						mindmapArea.removeAll();
 						mindmapArea.revalidate();
-						mindmapArea.repaint();
+//						mindmapArea.repaint();
 						break;
 					}
 				}
