@@ -26,16 +26,18 @@ public class NodeListener implements MouseListener{
 	int flag;
 	Point event;
 	boolean drag = true;
-	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode) {
+	AttributeArea attributeArea;
+	public NodeListener(Tree t, JPanel mindmapArea, Node dataNode, AttributeArea attributeArea) {
 		this.t = t;
 		this.mindmapArea = mindmapArea;
 		this.dataNode = dataNode;
+		this.attributeArea = attributeArea;
 	}
 	public void mousePressed(MouseEvent e) {
 		drag = true;
 		event = new Point(e.getX(),e.getY());
 		if(dataNode.getFocus() == false) {
-			dataNode.setColor(new Color(255-dataNode.getColor().getRed(),255-dataNode.getColor().getGreen(),255-dataNode.getColor().getBlue(),100));
+			dataNode.setColor(new Color(255-dataNode.getColor().getRed(),255-dataNode.getColor().getGreen(),255-dataNode.getColor().getBlue(),50));
 			ArrayList<Node> arr = new ArrayList<>();
 			t.makeArray(arr, t.getRoot());
 			Iterator<Node> it = arr.iterator();
@@ -45,7 +47,7 @@ public class NodeListener implements MouseListener{
 				if(n != dataNode)
 					if(n.getFocus() == true) {
 						n.setFocus(false);
-						n.setColor(new Color(255-n.getColor().getRed(),255-n.getColor().getGreen(),255-n.getColor().getBlue(),100));
+						n.setColor(new Color(255-n.getColor().getRed(),255-n.getColor().getGreen(),255-n.getColor().getBlue(),50));
 						break;
 					}
 			}
@@ -53,16 +55,15 @@ public class NodeListener implements MouseListener{
 		}
 
 		AttributeListener.me = dataNode;
-		mindmapArea.repaint();
+//		mindmapArea.repaint();
 		attributeArea.infoField.setEditable(false);
 		attributeArea.infoField.setText(dataNode.getInfo());
 		attributeArea.xField.setText(Double.toString(dataNode.getX()));
 		attributeArea.yField.setText(Double.toString(dataNode.getY()));
 		attributeArea.wField.setText(Integer.toString(dataNode.getWidth()));
 		attributeArea.hField.setText(Integer.toString(dataNode.getHeight()));
-		attributeArea.colorField.setText(Integer.toHexString(((dataNode.getColor().getRGB() - dataNode.getColor().getAlpha())/0x100)));
-		// node √Å¬§¬∫¬∏ √É√¢¬∑√Ç
-
+		attributeArea.colorField.setText(Integer.toHexString(0xffffff-((dataNode.getColor().getRGB())%0x1000000)));
+		System.out.println("¡∂¡≥¥Ÿ");
 	}
 	public void mouseReleased(MouseEvent e) {
 		drag = false;
@@ -106,18 +107,19 @@ public class NodeListener implements MouseListener{
 				
 			mindmapArea.removeAll();
 			mindmapArea.revalidate();
-			mindmapArea.repaint();
+//			mindmapArea.repaint();
 	
 		
 		}
 	public void mouseClicked(MouseEvent e) {
+		
 		if(dataNode.getFocus() == true) {
-		dataNode.setColor(new Color(255-dataNode.getColor().getRed(), 255-dataNode.getColor().getGreen(), 255-dataNode.getColor().getBlue(), 100));
+		dataNode.setColor(new Color(255-dataNode.getColor().getRed(), 255-dataNode.getColor().getGreen(), 255-dataNode.getColor().getBlue(), 50));
 		dataNode.setFocus(false);
 		}
 		mindmapArea.removeAll();
 		mindmapArea.revalidate();
-		mindmapArea.repaint();
+//		mindmapArea.repaint();
 	}
 	public void mouseEntered(MouseEvent e) {
 	}

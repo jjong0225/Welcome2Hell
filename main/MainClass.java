@@ -21,10 +21,9 @@ public class MainClass {
 	    Tree mainTree = new Tree();	
 	    JSONObject jsonObject = null;
 	    
-		//jsonObject는 모든 jasnoObject를 가리키는 참조변수
 		try {
 
-			jsonObject = (JSONObject)parser.parse(new FileReader("C:\\Users\\JongHoon\\Desktop\\숭실대\\2-1\\객체\\saveTest.json"));
+			jsonObject = (JSONObject)parser.parse(new FileReader("C:\\Users\\tkddu\\Desktop\\saveTest.json"));
 
 		} 
 		catch (FileNotFoundException e) {
@@ -39,7 +38,7 @@ public class MainClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+//
 		JsonHandler.loadJson(jsonObject, mainTree);		
 
 		JFrame mainFrame = new JFrame();

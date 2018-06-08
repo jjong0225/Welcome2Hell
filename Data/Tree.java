@@ -104,7 +104,7 @@ public class Tree {
               System.out.print("   ");
            }
            
-           me.setColor(new Color((50*i)%256,(100*i)%256,(150*i)%256,100));
+           me.setColor(new Color((50*i)%256, (100*i)%256,(150*i)%256,50)); // when level 1 => 326496
            List<Integer> list = new ArrayList<Integer>();
            Node node;
            node = me;

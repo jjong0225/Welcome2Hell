@@ -1,5 +1,6 @@
 package EventListener;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Data.Node;
@@ -38,7 +39,7 @@ public class AttributeListener implements ActionListener {
 		me.setColorFromStr(color);
 		mindmapArea.removeAll();
 		mindmapArea.revalidate();		
-		mindmapArea.repaint();
+//		mindmapArea.repaint();
 		System.out.println("success");
 	}
 }

@@ -27,29 +27,29 @@ public class AttributeArea{
 		attributePane = new JPanel();
 		
 		JLabel nameText2 = new JLabel ("Attribute Pane");
-		changeButton = new JButton("Ŕűżë");
+		changeButton = new JButton("apply");
 		changeButton.addActionListener(new AttributeListener(this, null));
 		JPanel attributeArea = new JPanel();
 
 		attributeArea.setLayout(new GridLayout(6,2));
 
 		attributeArea.add(new JLabel("TEXT"));
-		attributeArea.add(new JTextField());
+		attributeArea.add(infoField);
 
 		attributeArea.add(new JLabel("X"));
-		attributeArea.add(new JTextField());
+		attributeArea.add(xField);
 
 		attributeArea.add(new JLabel("Y"));
-		attributeArea.add(new JTextField());
+		attributeArea.add(yField);
 
 		attributeArea.add(new JLabel("W"));
-		attributeArea.add(new JTextField());
+		attributeArea.add(wField);
 
 		attributeArea.add(new JLabel("H"));
-		attributeArea.add(new JTextField());
+		attributeArea.add(hField);
 
 		attributeArea.add(new JLabel("Color"));
-		attributeArea.add(new JTextField());
+		attributeArea.add(colorField);
 
 
 

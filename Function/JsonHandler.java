@@ -110,10 +110,8 @@ public class JsonHandler {
 			rootObj.put("w", mainTree.getRoot().getWidth());
 			rootObj.put("h", mainTree.getRoot().getHeight());
 
-			rootObj.put("color", Integer.toHexString((mainTree.getRoot().getColor().getRGB()-mainTree.getRoot().getColor().getAlpha())/0x100));
+			rootObj.put("color", Integer.toHexString((mainTree.getRoot().getColor().getRGB())%0x1000000));
 
-
-			//child 호출
 			if(mainTree.getRoot().getChildren() != null && mainTree.getRoot().getChildren().get(0) != null) {
 				JSONArray children =Tree2JObj(mainTree.getRoot(), mainTree.getRoot().getChildren(), head);
 				head.put("Data", rootObj);
@@ -126,7 +124,7 @@ public class JsonHandler {
 		}		
 		
 		try {
-			FileWriter file = new FileWriter("C:\\Users\\JongHoon\\Desktop\\숭실대\\2-1\\객체\\saveTest.json");
+			FileWriter file = new FileWriter("C:\\\\Users\\\\tkddu\\\\Desktop\\\\saveTest.json");
 			file.write(head.toJSONString());
 			file.flush();
 			file.close();
@@ -170,11 +168,10 @@ public class JsonHandler {
 				dataObj.put("y", y) ;
 				dataObj.put("w", nowNode.getWidth());
 				dataObj.put("h", nowNode.getHeight());
-				dataObj.put("color",Integer.toHexString((nowNode.getColor().getRGB()-nowNode.getColor().getAlpha())/0x100));
+				dataObj.put("color",Integer.toHexString((nowNode.getColor().getRGB())%0x1000000));
 				
 
 				JSONArray children = null;
-				//child 호출
 				if(nowNode.getChildren() != null) {
 					children = Tree2JObj (root, nowNode.getChildren(), head);
 					returnObj.put("Data", dataObj);
@@ -184,7 +181,6 @@ public class JsonHandler {
 					returnObj.put("Data", dataObj);
 					returnObj.put("Children", null);			
 				}
-				//array에 추가
 				JArray.add(returnObj);
 			}
 		return JArray;

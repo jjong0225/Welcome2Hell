@@ -19,7 +19,7 @@ public class PanelResizedListener implements ComponentListener{
 		// TODO Auto-generated method stub
 		mindmapPane.removeAll();
 		mindmapPane.revalidate();
-//		mindmapPane.repaint();		
+//		mindmapPane.repaint();
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class PanelResizedListener implements ComponentListener{
 		// TODO Auto-generated method stub
 		mindmapPane.removeAll();
 		mindmapPane.revalidate();
-		mindmapPane.repaint();
+//		mindmapPane.repaint();
 	}
 
 	@Override
