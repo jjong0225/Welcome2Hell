@@ -17,29 +17,29 @@ public class MainClass {
 	
 	public static void main (String[] args) {
 		
-		JSONParser parser = new JSONParser(); 
+//		JSONParser parser = new JSONParser(); 
 	    Tree mainTree = new Tree();	
-	    JSONObject jsonObject = null;
-	    
-		try {
-
-			jsonObject = (JSONObject)parser.parse(new FileReader("C:\\Users\\tkddu\\Desktop\\saveTest.json"));
-
-		} 
-		catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//	    JSONObject jsonObject = null;
+//	    
+//		try {
 //
-		JsonHandler.loadJson(jsonObject, mainTree);		
+//			jsonObject = (JSONObject)parser.parse(new FileReader("C:\\Users\\tkddu\\Desktop\\saveTest.json"));
+//
+//		} 
+//		catch (FileNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+////
+//		JsonHandler.loadJson(jsonObject, mainTree);		
 
 		JFrame mainFrame = new JFrame();
 		GUI.FrameGUI GUI = new GUI.FrameGUI(mainFrame, mainTree);

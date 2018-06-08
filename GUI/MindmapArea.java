@@ -100,13 +100,12 @@ public class MindmapArea extends JPanel {
         		
             Node dataNode = it.next();
     		JLabel showNode =new JLabel(dataNode.getInfo());
-//    		System.out.println((String)dataNode.info);
     		showNode.setBackground(dataNode.getColor());
     		showNode.setOpaque(true);
-    		showNode.setBorder(new TitledBorder(new LineBorder(Color.black,3)));
-    		
+    		showNode.setBorder(new TitledBorder(new LineBorder(new Color(255-dataNode.getColor().getRed(), 255-dataNode.getColor().getGreen(), 255-dataNode.getColor().getBlue(), 255),3)));
+    		showNode.setForeground(new Color(255-dataNode.getColor().getRed(), 255-dataNode.getColor().getGreen(), 255-dataNode.getColor().getBlue(), 255));
     		showNode.setSize(dataNode.getWidth(), dataNode.getHeight());
-    		showNode.setLocation((int)(dataNode.getX() + this.getSize().getWidth()/2), (int)(dataNode.getY() + this.getSize().getHeight()/2));    		
+    		showNode.setLocation((int)Math.round(dataNode.getX() + this.getSize().getWidth()/2), (int)Math.round(dataNode.getY() + this.getSize().getHeight()/2));    		
     		this.add(showNode);
     		showNode.setVisible(true);
     		showNode.addMouseListener(new NodeListener(t, this, dataNode, attributeArea));
@@ -131,7 +130,8 @@ public class MindmapArea extends JPanel {
         			arrp = Point.showMeTheShortest(nodeUp, nodeRight, parentLeft, parentDown);
         			if((arrp[0] == nodeRight && arrp[1] == parentLeft) || (arrp [0] == nodeUp && arrp[1] == parentDown))
         				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
-        			else if(arrp[0] == nodeRight && arrp[1] == parentDown)
+        			else 
+        				if(arrp[0] == nodeRight && arrp[1] == parentDown)
         				g.drawArc((int)(2 * arrp[0].getX() - arrp[1].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[1].getY() - arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),270,90);
         			else
         				g.drawArc((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
@@ -140,7 +140,8 @@ public class MindmapArea extends JPanel {
         			arrp = Point.showMeTheShortest(nodeUp, nodeLeft, parentRight, parentDown);
         			if((arrp[0] == nodeLeft && arrp[1] == parentRight) || (arrp [0] == nodeUp && arrp[1] == parentDown))
         				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
-        			else if(arrp[0] == nodeUp && arrp[1] == parentRight)
+        			else 
+        				if(arrp[0] == nodeUp && arrp[1] == parentRight)
         				g.drawArc((int)(2*arrp[1].getX()-arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
         			else
         				g.drawArc((int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[1].getY() - arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),180,90);
@@ -149,7 +150,8 @@ public class MindmapArea extends JPanel {
         			arrp = Point.showMeTheShortest(nodeLeft, nodeDown, parentUp, parentRight);
         			if((arrp[0] == nodeLeft && arrp[1] == parentRight) || (arrp [0] == nodeDown && arrp[1] == parentUp))
         				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
-        			else if(arrp[0] == nodeLeft && arrp[1] == parentUp)
+        			else 
+        				if(arrp[0] == nodeLeft && arrp[1] == parentUp)
         				g.drawArc((int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),90,90);
         			else
         				g.drawArc((int)(2 * arrp[1].getX() - arrp[0].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[0].getY() - arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),270,90);
@@ -158,7 +160,8 @@ public class MindmapArea extends JPanel {
         			arrp = Point.showMeTheShortest(nodeDown, nodeRight, parentLeft, parentUp);
         			if((arrp[0] == nodeRight && arrp[1] == parentLeft) || (arrp [0] == nodeDown && arrp[1] == parentUp))
         				g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
-        			else if(arrp[0] == nodeRight && arrp[1] == parentUp)
+        			else 
+        				if(arrp[0] == nodeRight && arrp[1] == parentUp)
         				g.drawArc((int)(2*arrp[0].getX()-arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),0,90);
         			else
         				g.drawArc((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(2 * arrp[0].getY() - arrp[1].getY()+this.getSize().getHeight()/2), (int)(2*(Math.abs(arrp[1].getX()-arrp[0].getX()))), (int)(2*(Math.abs(arrp[1].getY()-arrp[0].getY()))),180,90);
@@ -167,18 +170,18 @@ public class MindmapArea extends JPanel {
         		}
 //        		g.drawLine((int)(arrp[0].getX()+this.getSize().getWidth()/2), (int)(arrp[0].getY()+this.getSize().getHeight()/2), (int)(arrp[1].getX()+this.getSize().getWidth()/2), (int)(arrp[1].getY()+this.getSize().getHeight()/2));
         	}
-        	this.repaint();
+        	
         	if(n.getFocus() == true) {
         		
-        		g.fillOval((int)n.getX()+this.getWidth()/2-3, (int)n.getY()+this.getHeight()/2-3, 10, 10);
-        		g.fillOval((int)n.getX()+n.getWidth()+this.getWidth()/2-7, (int)n.getY()+this.getHeight()/2-3, 10, 10);
-        		g.fillOval((int)n.getX()+this.getWidth()/2-3, (int)n.getY()+n.getHeight()+this.getHeight()/2-7, 10, 10);
-        		g.fillOval((int)n.getX()+n.getWidth()+this.getWidth()/2-7, (int)n.getY()+n.getHeight()+this.getHeight()/2-7, 10, 10);
+        		g.fillOval((int)Math.round(n.getX()+this.getWidth()/2-3), (int)Math.round(n.getY()+this.getHeight()/2-3), 10, 10);
+        		g.fillOval((int)Math.round(n.getX()+n.getWidth()+this.getWidth()/2-7), (int)Math.round(n.getY()+this.getHeight()/2-3), 10, 10);
+        		g.fillOval((int)Math.round(n.getX()+this.getWidth()/2-3), (int)Math.round(n.getY()+n.getHeight()+this.getHeight()/2-7), 10, 10);
+        		g.fillOval((int)Math.round(n.getX()+n.getWidth()+this.getWidth()/2-7), (int)Math.round(n.getY()+n.getHeight()+this.getHeight()/2-7), 10, 10);
         	}
         	
         }
         NodeArray = null;
-        
+        this.repaint();
 		}
 
 	

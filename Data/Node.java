@@ -18,10 +18,10 @@ public class Node {
     {
         this.info=info;
         p = new Point();
-        h=60;
-        w=90;
+        h=40;
+        w=60;
         focus = false;
-        color= new Color(150,150,150,50);
+        color= new Color(255,255,255,50);
         children  = new ArrayList<Node>();
     }
     
