@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
 import EventListener.AttributeListener;
 
 public class AttributeArea{
@@ -22,12 +21,11 @@ public class AttributeArea{
 	public JTextField colorField = new JTextField();
 	JButton changeButton;
 	
-
 	public AttributeArea() {
 		attributePane = new JPanel();
 		
 		JLabel nameText2 = new JLabel ("Attribute Pane");
-		changeButton = new JButton("apply");
+		changeButton = new JButton("Àû¿ë");
 		changeButton.addActionListener(new AttributeListener(this, null));
 		JPanel attributeArea = new JPanel();
 
@@ -52,16 +50,14 @@ public class AttributeArea{
 		attributeArea.add(colorField);
 
 
-
 		attributePane.setLayout(new BorderLayout());
 		attributePane.add(nameText2, BorderLayout.NORTH);
 		attributePane.add(attributeArea, BorderLayout.CENTER);
 		attributePane.add(changeButton, BorderLayout.SOUTH);
 	}
-
+	
 	public void setMindemapArea(MindmapArea mindmapArea) {
 		this.mindmapArea = mindmapArea;
 		changeButton.addActionListener(new AttributeListener(this, mindmapArea));
 	}
-
 }

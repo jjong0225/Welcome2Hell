@@ -21,13 +21,11 @@ public class ApplyMap implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		System.out.println(mindmapPane);
 		mindmapPane.removeAll();
-//		mindmapPane.repaint();
 		mindmapPane.revalidate();
 		mindmapPane.repaint();
 		mindmapArea.scroll.getHorizontalScrollBar().setValue((int)mainTree.getRoot().getX());
 		mindmapArea.scroll.getVerticalScrollBar().setValue((int)mainTree.getRoot().getY());
 		System.out.println(mindmapPane);
 		System.out.println("repainted");
-		Function.JsonHandler.saveData(mainTree);
 	}
 }

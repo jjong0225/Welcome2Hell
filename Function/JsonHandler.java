@@ -12,6 +12,7 @@ import Data.Tree;
 public class JsonHandler {
 
 	public static void loadJson (JSONObject jsonObject, Tree mainTree) {
+		System.out.println("1");
 		JSONObject JOB = ((JSONObject)jsonObject.get("Data"));
 		mainTree.setRoot(new Node((String)JOB.get("info")));
 		mainTree.getRoot().setX((double) JOB.get("x"));
@@ -23,7 +24,6 @@ public class JsonHandler {
 		JSONArray nowArray = (JSONArray)jsonObject.get("Children");
 		mainTree.getRoot().setChildren(array2Data(nowArray, mainTree.getRoot()));
 		getParent(mainTree.getRoot().getChildren(), mainTree.getRoot());
-
 	}
 	
 	public static ArrayList<Node> array2Data(JSONArray childrenArray, Node parent) {
@@ -41,28 +41,21 @@ public class JsonHandler {
 			JSONObject JOBData = (JSONObject) nowJOB.get("Data");
 			JSONArray newChildrenArray = (JSONArray)nowJOB.get("Children");
 			Node nowNode = new Node((String)JOBData.get("info"));
-
 			double x = (double) JOBData.get("x");
 			nowNode.setX(x);
-
 			nowNode.setY((double) JOBData.get("y"));
 			nowNode.setWidth((int)((long)JOBData.get("w")));
 			nowNode.setHeight((int)((long)JOBData.get("h")));
-			nowNode.setColorFromStr((String) JOBData.get("color"));
-
-			//			nowNode.parent = parent;
+			nowNode.setColorFromStr((String)JOBData.get("color"));
 
 			if (newChildrenArray != null) {
 				nowNode.setChildren(array2Data(newChildrenArray, null));
-//				System.out.println("3");
 			}
 			else {
 				nowNode.setChildren(null);
-				System.out.println("4");
 			}
 			returnArray.add(nowNode);
 		}
-
 		return returnArray;
 	}
 	
@@ -79,23 +72,19 @@ public class JsonHandler {
 		
 		while(iterator.hasNext()) {
 			Node node = iterator.next();
-
 			System.out.println(node.getX());
-
 			node.setParent(parent);
 			if (node.getChildren() != null) {
 				getParent(node.getChildren(), node);
-				System.out.println("5");
 			}
 			else {
-
 			}
 		}
 }
 
 			
 	
-	public static void saveData (Tree mainTree) {
+	public static void saveData (Tree mainTree, String filePath) {
 		JSONObject head = new JSONObject();
 		if(mainTree == null)
 			return;
@@ -109,9 +98,9 @@ public class JsonHandler {
 			rootObj.put("y", mainTree.getRoot().getY());
 			rootObj.put("w", mainTree.getRoot().getWidth());
 			rootObj.put("h", mainTree.getRoot().getHeight());
+			rootObj.put("color", Integer.toHexString((mainTree.getRoot().getColor().getRGB()-mainTree.getRoot().getColor().getAlpha())/0x100));
 
-			rootObj.put("color", Integer.toHexString((mainTree.getRoot().getColor().getRGB())%0x1000000));
-
+			//child 호출
 			if(mainTree.getRoot().getChildren() != null && mainTree.getRoot().getChildren().get(0) != null) {
 				JSONArray children =Tree2JObj(mainTree.getRoot(), mainTree.getRoot().getChildren(), head);
 				head.put("Data", rootObj);
@@ -124,14 +113,13 @@ public class JsonHandler {
 		}		
 		
 		try {
-			FileWriter file = new FileWriter("C:\\\\Users\\\\tkddu\\\\Desktop\\\\saveTest.json");
+			FileWriter file = new FileWriter(filePath);
 			file.write(head.toJSONString());
 			file.flush();
 			file.close();
 			System.out.println("saved");
 			
 		} catch (IOException e) {
-
 			e.printStackTrace();
 		}
 		
@@ -160,7 +148,6 @@ public class JsonHandler {
 				dataObj.put("parent", nowNode.getParent().getInfo());
 				dataObj.put("info", nowNode.getInfo());
 				dataObj.put("x", nowNode.getX());
-
 				double y = nowNode.getY();
 				if (y<1 && y>-1) {
 					y = 0;
@@ -168,10 +155,10 @@ public class JsonHandler {
 				dataObj.put("y", y) ;
 				dataObj.put("w", nowNode.getWidth());
 				dataObj.put("h", nowNode.getHeight());
-				dataObj.put("color",Integer.toHexString((nowNode.getColor().getRGB())%0x1000000));
+				dataObj.put("color",Integer.toHexString((nowNode.getColor().getRGB()-nowNode.getColor().getAlpha())/0x100));
 				
-
 				JSONArray children = null;
+				//child 호출
 				if(nowNode.getChildren() != null) {
 					children = Tree2JObj (root, nowNode.getChildren(), head);
 					returnObj.put("Data", dataObj);
@@ -181,6 +168,7 @@ public class JsonHandler {
 					returnObj.put("Data", dataObj);
 					returnObj.put("Children", null);			
 				}
+				//array에 추가
 				JArray.add(returnObj);
 			}
 		return JArray;

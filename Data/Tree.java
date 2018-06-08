@@ -103,8 +103,10 @@ public class Tree {
            for(int m=0; m<i ; m++) {
               System.out.print("   ");
            }
+
            int rand = (int)Math.pow(i, 2) - i + 41;
            me.setColor(new Color((int)Math.pow(rand, 2)%256, (int)Math.pow(rand, 3)%256, (int)Math.pow(rand, 5)%256,50));
+
            List<Integer> list = new ArrayList<Integer>();
            Node node;
            node = me;
