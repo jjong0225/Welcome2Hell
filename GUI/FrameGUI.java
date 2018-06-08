@@ -40,17 +40,39 @@ public class FrameGUI extends JFrame {
 		
 		// 메뉴바 목록 생성
 		JMenu menu1 = new JMenu("File");
-			JMenuItem menu1item1 = new JMenuItem("save");
-			menu1item1.addActionListener(new FileExplorerListener(mainTree,2));
+			JMenuItem menu1item1 = new JMenuItem("Make new");
+			menu1item1.addActionListener(new FileExplorerListener(mainTree,1));
 			menu1.add(menu1item1);
-			JMenuItem menu1item2 = new JMenuItem("load");
-			menu1item2.addActionListener(new FileExplorerListener(mainTree,1));
-			menu1.add(menu1item2);
-			menubar.add(menu1);
 
-//		JMenu menu2 = new JMenu("2");
-//		JMenu menu3 = new JMenu("3");
-//		JMenu menu4 = new JMenu("4");
+			JMenuItem menu1item2 = new JMenuItem("load");
+			menu1item2.addActionListener(new FileExplorerListener(mainTree,2));
+			menu1.add(menu1item2);
+
+			JMenuItem menu1item3 = new JMenuItem("save");
+			menu1item3.addActionListener(new FileExplorerListener(mainTree,3));
+			menu1.add(menu1item3);
+
+			JMenuItem menu1item4 = new JMenuItem("save as");
+			menu1item4.addActionListener(new FileExplorerListener(mainTree,4));
+			menu1.add(menu1item4);
+
+		
+			JMenuItem menu1item5 = new JMenuItem("exit");
+			menu1item5.addActionListener(new FileExplorerListener(mainTree,5));
+			menu1.add(menu1item5);
+			
+			JMenuItem menu1item6 = new JMenuItem("apply");
+			menu1item5.addActionListener(new EventListener.ApplyMap(mindmapArea, mainTree, mindmapArea));
+			menu1item5.addActionListener(new EventListener.ApplyListener(textArea.textarea, mainTree));
+			menu1.add(menu1item5);
+			
+			JMenuItem menu1item7 = new JMenuItem("change");
+			menu1item5.addActionListener(new FileExplorerListener(mainTree,5));
+			menu1.add(menu1item5);
+			
+			menubar.add(menu1);
+			
+
 			
 		//메뉴바 세팅
 		mainFrame.setJMenuBar(menubar);

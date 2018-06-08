@@ -14,10 +14,10 @@ import Data.Tree;
 public class FileExplorer {
 	static JFileChooser chooser;
 	
-	public static void Loading(Tree mainTree){
+	public static String Loading(Tree mainTree){
 		
 		if (mainTree == null)
-			return;
+			return null;
 
 		chooser = new JFileChooser(); 
 		chooser.setFileFilter(new FileNameExtensionFilter("json", "json"));
@@ -25,7 +25,7 @@ public class FileExplorer {
 		int ret = chooser.showOpenDialog(null);
 		if (ret != JFileChooser.APPROVE_OPTION) {
 			JOptionPane.showMessageDialog(null, "경로를 선택하지않았습니다.","경고", JOptionPane.WARNING_MESSAGE);
-			return;
+			return null;
 		}
 
 		String filePath = chooser.getSelectedFile().getPath();  //파일경로를 가져옴
@@ -45,21 +45,26 @@ public class FileExplorer {
 			e.printStackTrace();
 		}
 		JsonHandler.loadJson(jsonObject, mainTree);
+		return filePath;
 	}
 	
-	public static void saving (Tree mainTree){
-		
+	public static String saving (Tree mainTree, String address){
+		String filePath = null;		
 		if (mainTree == null)
-			return;
-
-		chooser = new JFileChooser();
-		int ret = chooser.showSaveDialog(null); 
-		if (ret != JFileChooser.APPROVE_OPTION) {
-			JOptionPane.showMessageDialog(null, "경로를 선택하지않았습니다.","경고", JOptionPane.WARNING_MESSAGE);
-			return;
+			return null;
+		if (address == null) {
+			chooser = new JFileChooser();
+			int ret = chooser.showSaveDialog(null); 
+			if (ret != JFileChooser.APPROVE_OPTION) {
+				JOptionPane.showMessageDialog(null, "경로를 선택하지않았습니다.","경고", JOptionPane.WARNING_MESSAGE);
+				return null;
+			}
+			filePath = chooser.getSelectedFile().getPath();
 		}
-		String filePath = chooser.getSelectedFile().getPath();
+		else
+			filePath = address;
 		Function.JsonHandler.saveData(mainTree, filePath);
+		return filePath;
 	}
 }
 

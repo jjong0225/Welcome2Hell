@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -40,6 +41,8 @@ public class MindmapArea extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Path2D p = new Path2D.Double();
+		
 		ArrayList<Node> NodeArray = new ArrayList<Node>();
 		
 		Tree t = mainTree;
